@@ -6,6 +6,7 @@ export const APP_THEME: ThemeConfig = {
   token: {
     colorPrimary: colors.brand[400],
     fontFamily: 'Poppins',
+    linkDecoration: 'none',
   },
   components: {
     Button: {
