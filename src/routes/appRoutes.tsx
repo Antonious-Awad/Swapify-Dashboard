@@ -5,13 +5,15 @@ import {
 } from 'react-router-dom'
 import { APP_PATHS } from '../utils/paths'
 import App from '../App'
+import { LoginLayout } from '../layouts'
+import { Login } from '../pages/Login'
 
 export const appRoutes = createBrowserRouter(
   //TODO: create wrong route error element
   createRoutesFromElements(
     <Route path={APP_PATHS.landing} element={<App />}>
-      <Route element={<div>login layout</div>}>
-        <Route path={APP_PATHS.login} element={<div>login</div>} />
+      <Route element={<LoginLayout />}>
+        <Route path={APP_PATHS.login} element={<Login />} />
       </Route>
       <Route element={<div>app layout</div>}>
         <Route path={APP_PATHS.transactions} element={<div>transaction</div>} />
