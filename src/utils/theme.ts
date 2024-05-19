@@ -5,6 +5,7 @@ import { colors } from '../styles/colors'
 export const APP_THEME: ThemeConfig = {
   token: {
     colorPrimary: colors.brand[400],
+    fontFamily: 'Poppins',
   },
   components: {
     Button: {
