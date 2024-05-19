@@ -1,9 +1,9 @@
-import { Button } from 'antd';
-
+import { App as AppAntd } from 'antd'
+import { Outlet } from 'react-router-dom'
 const App = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-);
+  <AppAntd>
+    <Outlet />
+  </AppAntd>
+)
 
-export default App;
+export default App
