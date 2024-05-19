@@ -1,6 +1,6 @@
 import { ThemeConfig } from 'antd'
 
-import { colors } from './colors'
+import { colors } from '../styles/colors'
 
 export const APP_THEME: ThemeConfig = {
   token: {
