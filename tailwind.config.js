@@ -8,6 +8,7 @@ export default {
       colors: systemColors,
       fontSize: {
         h1SemiBold: '2rem',
+        h2Regular: '1.5rem',
       },
       fontFamily: {
         sans: ['Poppins', 'ui-sans-serif'],
