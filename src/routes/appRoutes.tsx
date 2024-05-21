@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import { APP_PATHS } from '../utils/paths'
 import App from '../App'
-import { LoginLayout } from '../layouts'
+import { AppLayout, LoginLayout } from '../layouts'
 import { Login } from '../pages/Login'
 
 export const appRoutes = createBrowserRouter(
@@ -15,7 +15,7 @@ export const appRoutes = createBrowserRouter(
       <Route element={<LoginLayout />}>
         <Route path={APP_PATHS.login} element={<Login />} />
       </Route>
-      <Route element={<div>app layout</div>}>
+      <Route element={<AppLayout />}>
         <Route path={APP_PATHS.transactions} element={<div>transaction</div>} />
         <Route path={APP_PATHS.categories} element={<div>categories</div>} />
         <Route

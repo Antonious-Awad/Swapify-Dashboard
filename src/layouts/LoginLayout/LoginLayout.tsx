@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
-import backgroundImage from '../assets/Images/LoginBackground.png'
+import backgroundImage from '../../assets/Images/LoginBackground.png'
 
 export const LoginLayout = () => {
   return (

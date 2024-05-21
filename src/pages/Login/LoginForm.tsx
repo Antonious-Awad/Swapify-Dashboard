@@ -21,6 +21,7 @@ export const LoginForm = () => {
     isPending: isLoggingIn,
     isError,
     isSuccess,
+    data: loginData,
   } = useMutation<AxiosResponse<LoginResponse>, AxiosError, LoginRequest>({
     mutationFn: login,
     mutationKey: ['login'],
@@ -28,7 +29,10 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (isError) activateModal('danger', 'Login Failed')
-    if (isSuccess) navigate(APP_PATHS.dashboard)
+    if (isSuccess) {
+      sessionStorage.setItem('token', loginData.data.token)
+      navigate(APP_PATHS.dashboard)
+    }
   }, [isError, isSuccess])
 
   const handleOnSubmit = (data: LoginRequest) => {
