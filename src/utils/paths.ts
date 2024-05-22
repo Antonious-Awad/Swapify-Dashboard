@@ -6,6 +6,6 @@ export const APP_PATHS = {
   customers: '/customers',
   customerProfile: '/customers/profile',
   profile: '/profile',
-  postsRequest: '/requests',
+  postsRequest: '/posts-requests',
   categories: '/categories',
 } as const

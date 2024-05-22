@@ -9,6 +9,7 @@ import { useModal } from '../../hooks'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
+import { storeSessionsToken } from '../../utils/token'
 
 export const LoginForm = () => {
   const [form] = Form.useForm()
@@ -30,7 +31,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (isError) activateModal('danger', 'Login Failed')
     if (isSuccess) {
-      sessionStorage.setItem('token', loginData.data.token)
+      storeSessionsToken(loginData.data.token)
       navigate(APP_PATHS.dashboard)
     }
   }, [isError, isSuccess])

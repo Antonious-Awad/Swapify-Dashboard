@@ -20,5 +20,16 @@ export const APP_THEME: ThemeConfig = {
       colorBgBase: colors.neutral[200],
       colorBgBlur: colors.neutral[200],
     },
+    Layout: {
+      siderBg: '#fff',
+      headerBg: '#fff',
+    },
+    Menu: {
+      groupTitleColor: colors.neutral[300],
+      groupTitleFontSize: 12,
+      itemColor: colors.neutral[300],
+      itemSelectedBg: colors.brand[300],
+      itemSelectedColor: '#fff',
+    },
   },
 }

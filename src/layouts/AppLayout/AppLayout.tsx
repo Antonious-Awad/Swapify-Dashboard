@@ -1,20 +1,70 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
-import { Layout, Menu } from 'antd'
+import { Button, Dropdown, Layout, MenuProps, Typography } from 'antd'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
-import { sidebarItems } from './config'
+import { checkValidToken, removeSessionsToken } from '../../utils/token'
+import { capitalizeFirstLetter } from '../../utils/string'
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 
 export const AppLayout = () => {
-  const checkValidToken = () => {
-    const token = sessionStorage.getItem('token')
-    return !!token
-  }
+  const { pathname } = useLocation()
+
+  const routePath = pathname.split('/')
+
+  const doesTitleHasDash = routePath[1].includes('-')
+
+  const splicedTitle = doesTitleHasDash ? routePath[1].split('-') : routePath[1]
+
+  const headerTitle = doesTitleHasDash
+    ? `${capitalizeFirstLetter(splicedTitle[0])} ${capitalizeFirstLetter(splicedTitle[1])}`
+    : capitalizeFirstLetter(routePath[1])
+
+  const logout: MenuProps['items'] = [
+    {
+      key: 'logout',
+      label: (
+        <Button
+          type="link"
+          icon={<LogoutOutlined />}
+          onClick={() => {
+            removeSessionsToken()
+            location.reload()
+          }}
+        >
+          Logout
+        </Button>
+      ),
+    },
+  ]
+
+  const { Header, Content } = Layout
   const ApplicationLayout = () => (
     <Layout className="min-h-screen">
-      <Sidebar items={sidebarItems} />
-      <Outlet />
+      <Sidebar />
+      <Layout>
+        <Header className="flex justify-between">
+          <Typography.Text className="font-semibold text-h1SemiBold text-brand-400 flex items-center">
+            {headerTitle}
+          </Typography.Text>
+
+          <div className="flex items-center">
+            <Dropdown
+              menu={{ items: logout }}
+              arrow
+              placement="bottomCenter"
+              trigger={['click']}
+            >
+              <UserOutlined style={{ fontSize: '20px' }} />
+            </Dropdown>
+          </div>
+        </Header>
+        <Content>
+          <Outlet />
+        </Content>
+      </Layout>
     </Layout>
   )
+
   return checkValidToken() ? (
     <ApplicationLayout />
   ) : (
