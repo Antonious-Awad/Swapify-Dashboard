@@ -31,5 +31,9 @@ export const APP_THEME: ThemeConfig = {
       itemSelectedBg: colors.brand[300],
       itemSelectedColor: '#fff',
     },
+    Table: {
+      headerBg: '#fff',
+      headerColor: colors.neutral[300],
+    },
   },
 }

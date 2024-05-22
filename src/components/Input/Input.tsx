@@ -9,6 +9,9 @@ export const Input = ({ variant, placeholder, ...rest }: InputProps) => {
         variant={variant || 'borderless'}
         {...rest}
         className="bg-neutral-200"
+        classNames={{
+          input: 'h-[2.5rem]',
+        }}
       />
     </Flex>
   )

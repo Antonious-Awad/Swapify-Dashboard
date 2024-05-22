@@ -58,7 +58,7 @@ export const AppLayout = () => {
             </Dropdown>
           </div>
         </Header>
-        <Content>
+        <Content className="px-8">
           <Outlet />
         </Content>
       </Layout>

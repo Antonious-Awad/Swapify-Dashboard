@@ -1,6 +1,6 @@
 import { Input as AntdInput, Typography, Flex } from 'antd'
 import type { PasswordProps } from 'antd/es/input'
-import { Lock, EyeClose, EyeOpen } from '../icons'
+import { Lock } from '../icons'
 
 export const InputPassword = ({
   placeholder,
@@ -17,6 +17,9 @@ export const InputPassword = ({
         className="bg-neutral-200"
         type="password"
         prefix={<Lock />}
+        classNames={{
+          input: 'h-[2.5rem]',
+        }}
       />
     </Flex>
   )

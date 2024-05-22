@@ -70,10 +70,10 @@ export const LoginForm = () => {
           <Button
             htmlType="submit"
             type="primary"
-            className="w-[75%] my-[1rem] font-semibold"
+            className="w-[75%] h-[3.5rem] my-[1rem] font-semibold"
             loading={isLoggingIn}
           >
-            Login
+            <span className="text-[1.375rem]">Login</span>
           </Button>
         </Form>
       </Flex>
