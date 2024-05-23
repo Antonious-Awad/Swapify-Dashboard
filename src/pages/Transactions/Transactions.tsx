@@ -1,5 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllAcceptedTransaction } from '../../api/transactions/requests'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+  getAllAcceptedTransaction,
+  getTransactionDetails,
+} from '../../api/transactions/requests'
 import { useEffect } from 'react'
 import { useModal } from '../../hooks'
 import axios from 'axios'
@@ -12,31 +15,49 @@ export const Transactions = () => {
 
   const {
     data: { data: transactions } = {},
-    isError,
-    isPending,
-    error,
+    isError: isFetchingAllTranscationError,
+    isPending: isFetchingTransactions,
+    error: fetchTransactionsError,
   } = useQuery({
     queryKey: ['get-transactions'],
     queryFn: getAllAcceptedTransaction,
     retry: 2,
   })
 
+  const {
+    data,
+    isError: isFetchingDetailsError,
+    isPending: isFetchingDetails,
+    error: fetchDetailsError,
+    mutate: fetchTransactionDetails,
+  } = useMutation({
+    mutationFn: getTransactionDetails,
+    mutationKey: ['get-transaction-details'],
+  })
+
   useEffect(() => {
-    if (isError) {
+    if (isFetchingAllTranscationError) {
       activateModal(
         'danger',
-        axios.isAxiosError(error)
-          ? error.message
+        axios.isAxiosError(fetchTransactionsError)
+          ? fetchTransactionsError.message
           : 'Fetching Transactions Failed'
       )
     }
-  })
+  }, [isFetchingAllTranscationError])
 
   return (
     <Table<TableTransaction>
       columns={TransactionTableColumns}
       dataSource={transactions}
-      loading={isPending}
+      loading={isFetchingTransactions}
+      rowKey={'request_id'}
+      expandable={{
+        expandedRowRender: (record) => <div>{record.request_id}</div>,
+        onExpand: (expand, { request_id }) => {
+          if (expand) fetchTransactionDetails({ requestId: request_id })
+        },
+      }}
     />
   )
 }

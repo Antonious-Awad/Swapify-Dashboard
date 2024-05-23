@@ -1,5 +1,5 @@
-import { TableProps } from 'antd'
-import { TableTransaction } from '../../common/types'
+import { Table, type TableProps } from 'antd'
+import type { TableTransaction } from '../../common/types'
 import { calculateTimeFromToday } from '../../utils/date'
 
 export const TransactionTableColumns: TableProps<TableTransaction>['columns'] =
@@ -38,4 +38,5 @@ export const TransactionTableColumns: TableProps<TableTransaction>['columns'] =
       dataIndex: 'requested_item_name',
       render: (item: TableTransaction['requested_item_name']) => item || 'N/A',
     },
+    Table.EXPAND_COLUMN,
   ]

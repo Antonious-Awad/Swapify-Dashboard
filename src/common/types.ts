@@ -6,3 +6,9 @@ export type TableTransaction = {
   request_id: string
   requested_item_name?: string
 }
+
+export type ExchangeItem = {
+  description: string
+  price: number
+  title: string
+}
