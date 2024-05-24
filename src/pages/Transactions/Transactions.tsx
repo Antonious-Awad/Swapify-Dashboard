@@ -5,10 +5,15 @@ import {
 } from '../../api/transactions/requests'
 import { useEffect } from 'react'
 import { useModal } from '../../hooks'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { Table } from 'antd'
-import { TableTransaction } from '../../common/types'
+import { AppErrorResponse, TableTransaction } from '../../common/types'
 import { TransactionTableColumns } from './config'
+import {
+  GetAllAcceptedTransactionRes,
+  GetTransactionDetailsReq,
+  GetTransactionDetailsRes,
+} from '../../api/transactions/types'
 
 export const Transactions = () => {
   const { activateModal } = useModal()
@@ -18,19 +23,24 @@ export const Transactions = () => {
     isError: isFetchingAllTranscationError,
     isPending: isFetchingTransactions,
     error: fetchTransactionsError,
-  } = useQuery({
+  } = useQuery<AxiosResponse<GetAllAcceptedTransactionRes>, AppErrorResponse>({
     queryKey: ['get-transactions'],
     queryFn: getAllAcceptedTransaction,
     retry: 2,
   })
 
+  //TODO: Finalize the expand UI and logic
   const {
     data,
     isError: isFetchingDetailsError,
     isPending: isFetchingDetails,
     error: fetchDetailsError,
     mutate: fetchTransactionDetails,
-  } = useMutation({
+  } = useMutation<
+    AxiosResponse<GetTransactionDetailsRes>,
+    AppErrorResponse,
+    GetTransactionDetailsReq
+  >({
     mutationFn: getTransactionDetails,
     mutationKey: ['get-transaction-details'],
   })
@@ -39,9 +49,9 @@ export const Transactions = () => {
     if (isFetchingAllTranscationError) {
       activateModal(
         'danger',
-        axios.isAxiosError(fetchTransactionsError)
-          ? fetchTransactionsError.message
-          : 'Fetching Transactions Failed'
+        fetchTransactionsError.response?.data.error ||
+          fetchDetailsError?.response?.data.message ||
+          'Fetching Transactions Failed'
       )
     }
   }, [isFetchingAllTranscationError])

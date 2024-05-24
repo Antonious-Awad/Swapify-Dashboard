@@ -7,6 +7,7 @@ export const APP_THEME: ThemeConfig = {
     colorPrimary: colors.brand[300],
     fontFamily: 'Poppins',
     linkDecoration: 'none',
+    colorText: colors.brand[400],
   },
   components: {
     Button: {

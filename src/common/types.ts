@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios'
+
 export type TableTransaction = {
   From: string
   To: string
@@ -12,3 +14,28 @@ export type ExchangeItem = {
   price: number
   title: string
 }
+
+type Location = {
+  governorate: string
+  city: string
+}
+export type Customer = {
+  createdAt: string
+  updatedAt: string
+  email: string
+  favorites: string[]
+  location: Location
+  _id: string
+  username: string
+  password: string
+  role: 'user' | 'admin'
+  phone: string
+  token: string
+  __v: number
+  image: string
+}
+
+export type AppErrorResponse = AxiosError<{
+  message?: string
+  error?: string
+}>

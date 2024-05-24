@@ -4,7 +4,7 @@ const oneHour = 1000 * 60 * 60
 
 const oneMinute = 1000 * 60
 
-export const calculateTimeFromToday = (date: string) => {
+export const calculateTimeFromToday = (date: string | number) => {
   const currentDate = new Date()
   const refrenceDate = new Date(date)
 
@@ -23,4 +23,17 @@ export const calculateTimeFromToday = (date: string) => {
   differenceInterval = `${diffDays} days`
 
   return differenceInterval + ' ago'
+}
+
+export const formatToDDMMMYYYY = (date: string | number) => {
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }
+
+  const formattedDate = Intl.DateTimeFormat('en-GB', options).format(
+    new Date(date)
+  )
+  return formattedDate
 }

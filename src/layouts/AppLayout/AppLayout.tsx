@@ -39,7 +39,7 @@ export const AppLayout = () => {
 
   const { Header, Content } = Layout
   const ApplicationLayout = () => (
-    <Layout className="min-h-screen">
+    <Layout className="min-h-screen" hasSider>
       <Sidebar />
       <Layout>
         <Header className="flex justify-between">
@@ -58,7 +58,7 @@ export const AppLayout = () => {
             </Dropdown>
           </div>
         </Header>
-        <Content className="px-8">
+        <Content className="px-8 py-1">
           <Outlet />
         </Content>
       </Layout>

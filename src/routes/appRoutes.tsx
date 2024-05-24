@@ -8,6 +8,7 @@ import App from '../App'
 import { AppLayout, LoginLayout } from '../layouts'
 import { Login } from '../pages/Login'
 import { Transactions } from '../pages/Transactions'
+import { CustomerList } from '../pages/Customer'
 
 export const appRoutes = createBrowserRouter(
   //TODO: create wrong route error element
@@ -23,7 +24,7 @@ export const appRoutes = createBrowserRouter(
           path={APP_PATHS.customerProfile}
           element={<div>customer profile</div>}
         />
-        <Route path={APP_PATHS.customers} element={<div>customers list</div>} />
+        <Route path={APP_PATHS.customers} element={<CustomerList />} />
         <Route path={APP_PATHS.dashboard} element={<div>dash</div>} />
         <Route path={APP_PATHS.profile} element={<div>prof</div>} />
         <Route
