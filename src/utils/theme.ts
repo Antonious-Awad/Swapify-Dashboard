@@ -14,6 +14,8 @@ export const APP_THEME: ThemeConfig = {
       primaryColor: colors.neutral[200],
       colorBorder: '#fff',
       defaultShadow: '#fff',
+      ghostBg: '#fff',
+      defaultGhostColor: colors.neutral[300],
     },
     Input: {
       colorIcon: colors.brand[300],

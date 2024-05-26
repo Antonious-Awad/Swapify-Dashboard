@@ -51,7 +51,7 @@ export const AppLayout = () => {
             <Dropdown
               menu={{ items: logout }}
               arrow
-              placement="bottomCenter"
+              placement="bottom"
               trigger={['click']}
             >
               <UserOutlined style={{ fontSize: '20px' }} />

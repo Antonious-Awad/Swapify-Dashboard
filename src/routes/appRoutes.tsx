@@ -9,6 +9,7 @@ import { AppLayout, LoginLayout } from '../layouts'
 import { Login } from '../pages/Login'
 import { Transactions } from '../pages/Transactions'
 import { CustomerList } from '../pages/Customer'
+import { CategoriesList } from '../pages/Categories/CategoriesList'
 
 export const appRoutes = createBrowserRouter(
   //TODO: create wrong route error element
@@ -19,7 +20,7 @@ export const appRoutes = createBrowserRouter(
       </Route>
       <Route element={<AppLayout />}>
         <Route path={APP_PATHS.transactions} element={<Transactions />} />
-        <Route path={APP_PATHS.categories} element={<div>categories</div>} />
+        <Route path={APP_PATHS.categories} element={<CategoriesList />} />
         <Route
           path={APP_PATHS.customerProfile}
           element={<div>customer profile</div>}

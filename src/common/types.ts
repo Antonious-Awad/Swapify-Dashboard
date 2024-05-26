@@ -39,3 +39,10 @@ export type AppErrorResponse = AxiosError<{
   message?: string
   error?: string
 }>
+
+export type Category = {
+  id: string
+  createdAt: string
+  itemCount: number
+  name: string
+}
