@@ -12,30 +12,30 @@ export const Collapse = () => {
       <path
         d="M20 6H13"
         stroke="#888888"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth={'1.75'}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20 12H11"
         stroke="#888888"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20 18H13"
         stroke="#888888"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8 8L4 12L8 16"
         stroke="#888888"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )
