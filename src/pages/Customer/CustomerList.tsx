@@ -40,16 +40,26 @@ export const CustomerList = () => {
   })
   const customerList = customerResponse?.data.data
 
-  const {
-    mutate: deleteCustomerMutate,
-    isPending: isDeleting,
-    isError: isDeleteError,
-    error: deleteError,
-    isSuccess: isDeleteSuccess,
-    data: { data: { msg } = { msg: '' } } = {},
-  } = useMutation<AxiosResponse<DeleteCustomerRes>, DeleteCustomerRes, string>({
+  const { mutate: deleteCustomerMutate, isPending: isDeleting } = useMutation<
+    AxiosResponse<DeleteCustomerRes>,
+    DeleteCustomerRes,
+    string
+  >({
     mutationKey: [`delete-customer-${currentId}`],
     mutationFn: deleteCustomer,
+    onError: (err) =>
+      activateModal('danger', err.msg || 'Deleting customer failed'),
+    onSuccess: (response) => {
+      notification('success', {
+        message: response.data.msg,
+        duration: 1,
+        onClose: () => {
+          queryClient.invalidateQueries({
+            queryKey: ['get-customers', query.limit, query.page],
+          })
+        },
+      })
+    },
   })
 
   useEffect(() => {
@@ -62,22 +72,6 @@ export const CustomerList = () => {
       )
     }
   }, [isFetchingCustomerErr, customerListError])
-
-  useEffect(() => {
-    if (isDeleteError)
-      activateModal('danger', deleteError.msg || 'Deleting customer failed')
-
-    if (isDeleteSuccess)
-      notification('success', {
-        message: msg,
-        duration: 1,
-        onClose: () => {
-          queryClient.invalidateQueries({
-            queryKey: ['get-customers', query.limit, query.page],
-          })
-        },
-      })
-  }, [isDeleteError, isDeleteSuccess])
 
   return (
     <Table<Customer>

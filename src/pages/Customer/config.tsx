@@ -1,4 +1,4 @@
-import { Button, Flex, Popconfirm, Row, TableProps } from 'antd'
+import { Button, Popconfirm, Row, TableProps } from 'antd'
 import { Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
 import { DeleteOutlined } from '@ant-design/icons'
@@ -38,7 +38,6 @@ export const customerListColumns = (
   {
     key: 'action',
     title: 'Actions',
-    dataIndex: '_id',
     render: (_, { _id }) => {
       return (
         <Popconfirm title="Are You Sure?" onConfirm={() => onDelete(_id)}>

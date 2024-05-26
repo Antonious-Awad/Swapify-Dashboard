@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
 import { storeSessionsToken } from '../../utils/token'
+import { AppErrorResponse } from '../../common/types'
 
 export const LoginForm = () => {
   const [form] = Form.useForm()
@@ -17,24 +18,20 @@ export const LoginForm = () => {
   const { activateModal } = useModal()
   const navigate = useNavigate()
 
-  const {
-    mutate: loginMutate,
-    isPending: isLoggingIn,
-    isError,
-    isSuccess,
-    data: loginData,
-  } = useMutation<AxiosResponse<LoginResponse>, AxiosError, LoginRequest>({
+  const { mutate: loginMutate, isPending: isLoggingIn } = useMutation<
+    AxiosResponse<LoginResponse>,
+    AppErrorResponse,
+    LoginRequest
+  >({
     mutationFn: login,
     mutationKey: ['login'],
-  })
-
-  useEffect(() => {
-    if (isError) activateModal('danger', 'Login Failed')
-    if (isSuccess) {
-      storeSessionsToken(loginData.data.token)
+    onSuccess: (response) => {
+      storeSessionsToken(response.data.token)
       navigate(APP_PATHS.dashboard)
-    }
-  }, [isError, isSuccess])
+    },
+    onError: (err) =>
+      activateModal('danger', err.response?.data.message || 'Login Failed'),
+  })
 
   const handleOnSubmit = (data: LoginRequest) => {
     loginMutate(data)
