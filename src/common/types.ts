@@ -15,7 +15,7 @@ export type ExchangeItem = {
   title: string
 }
 
-type Location = {
+export type Location = {
   governorate: string
   city: string
 }
@@ -38,6 +38,7 @@ export type Customer = {
 export type AppErrorResponse = AxiosError<{
   message?: string
   error?: string
+  success?: boolean
 }>
 
 export type Category = {
@@ -45,4 +46,13 @@ export type Category = {
   createdAt: string
   itemCount: number
   name: string
+}
+
+export type CustomerRequest = {
+  requestId: string
+  requesterName: string
+  requestedUserName: string
+  offeredItemTitle: string
+  requestedItemTitle: string
+  timeAgo: string
 }

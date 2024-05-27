@@ -12,13 +12,14 @@ import { AxiosResponse } from 'axios'
 import { Table } from 'antd'
 import { customerListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
+import { useNavigate } from 'react-router-dom'
+import { APP_PATHS } from '../../utils/paths'
 
 export const CustomerList = () => {
   const { activateModal } = useModal()
-
   const { notification } = useNotificationContext()
-
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const currentId = useRef('')
 
@@ -45,7 +46,7 @@ export const CustomerList = () => {
     DeleteCustomerRes,
     string
   >({
-    mutationKey: [`delete-customer-${currentId}`],
+    mutationKey: [`delete-customer-${currentId.current}`],
     mutationFn: deleteCustomer,
     onError: (err) =>
       activateModal('danger', err.msg || 'Deleting customer failed'),
@@ -73,15 +74,21 @@ export const CustomerList = () => {
     }
   }, [isFetchingCustomerErr, customerListError])
 
+  const handleEyeClick = (customerId: string) =>
+    navigate(APP_PATHS.customerProfile, {
+      state: { customerId },
+    })
+
   return (
     <Table<Customer>
       loading={isFetchingCustomers}
       dataSource={customerList}
-      columns={customerListColumns(
-        deleteCustomerMutate,
+      columns={customerListColumns({
+        onDelete: deleteCustomerMutate,
         isDeleting,
-        currentId.current
-      )}
+        currentId: currentId.current,
+        onEyeClick: handleEyeClick,
+      })}
       rowKey={({ _id }) => _id}
       onRow={({ _id }) => ({
         onClick: () => {

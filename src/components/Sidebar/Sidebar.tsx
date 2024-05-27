@@ -11,14 +11,17 @@ export const Sidebar = () => {
   const [collapse, setCollapse] = useState(false)
   const routePath = useLocation().pathname.split('/')
   const navigate = useNavigate()
+
+  console.log(collapse)
   return (
     <Sider collapsible trigger={null} width={'18%'} collapsed={collapse}>
-      <div className="flex justify-between px-5 py-6">
+      <div
+        className={`flex justify-between px-5 py-6 ${collapse ? 'flex-col' : ''}`}
+      >
         <Link to={APP_PATHS.dashboard}>
           <TrdLogo width="76" height="22" />
         </Link>
-        {/*TODO: Check why this button doesn't work & why the items are not selected when clicked */}
-        <Button type="link" onClick={() => setCollapse(false)}>
+        <Button type="link" onClick={() => setCollapse(!collapse)}>
           <Collapse />
         </Button>
       </div>
@@ -27,7 +30,6 @@ export const Sidebar = () => {
         mode="inline"
         items={sidebarItems(navigate)}
         selectedKeys={routePath}
-        openKeys={['main-menu', 'categories', 'admin']}
         expandIcon={() => undefined}
       />
     </Sider>

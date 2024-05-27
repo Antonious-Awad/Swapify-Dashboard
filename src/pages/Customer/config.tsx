@@ -1,13 +1,15 @@
-import { Button, Popconfirm, Row, TableProps } from 'antd'
+import { Button, Popconfirm, Row, Space, TableProps } from 'antd'
 import { Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { CustomerListColumns } from './types'
 
-export const customerListColumns = (
-  onDelete: (id: Customer['_id']) => void,
-  isDeleting: boolean,
-  currentId: string
-): TableProps<Customer>['columns'] => [
+export const customerListColumns = ({
+  currentId,
+  isDeleting,
+  onDelete,
+  onEyeClick,
+}: CustomerListColumns): TableProps<Customer>['columns'] => [
   {
     dataIndex: '_id',
     key: 'id',
@@ -40,13 +42,16 @@ export const customerListColumns = (
     title: 'Actions',
     render: (_, { _id }) => {
       return (
-        <Popconfirm title="Are You Sure?" onConfirm={() => onDelete(_id)}>
-          <Button
-            icon={<DeleteOutlined />}
-            key={_id}
-            loading={isDeleting && _id === currentId}
-          />
-        </Popconfirm>
+        <Space>
+          <Popconfirm title="Are You Sure?" onConfirm={() => onDelete(_id)}>
+            <Button
+              icon={<DeleteOutlined />}
+              key={_id}
+              loading={isDeleting && _id === currentId}
+            />
+          </Popconfirm>
+          <Button icon={<EyeOutlined />} onClick={() => onEyeClick(_id)} />
+        </Space>
       )
     },
   },

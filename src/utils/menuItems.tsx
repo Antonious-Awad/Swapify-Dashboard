@@ -63,7 +63,7 @@ export const sidebarItems = (
     type: 'group',
     children: [
       {
-        key: 'profile',
+        key: 'admin-profile',
         label: 'View Profile',
         icon: <UserOutlined />,
         onClick: () => navigate(APP_PATHS.profile),
