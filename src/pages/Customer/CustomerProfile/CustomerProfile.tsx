@@ -21,7 +21,7 @@ export const CustomerProfile = () => {
   const { notification } = useNotificationContext()
 
   const {
-    isPending: isFetchingCustomerDetails,
+    isLoading: isFetchingCustomerDetails,
     data: customerDetailsRes,
     isError: isCustomerDetailsError,
     error: customerDetailsError,

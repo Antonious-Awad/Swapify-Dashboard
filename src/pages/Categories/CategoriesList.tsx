@@ -23,7 +23,7 @@ export const CategoriesList = () => {
   const queryClient = useQueryClient()
 
   const {
-    isPending: isFetchingCategories,
+    isLoading: isFetchingCategories,
     isError: isCategoriesError,
     error: categoriesError,
     data: categories,

@@ -1,10 +1,8 @@
 import { Customer, CustomerRequest, Location } from '../../common/types'
 
 export type GetCustomerReq = {
-  query: {
-    limit?: number
-    page?: number
-  }
+  limit?: number
+  page?: number
 }
 
 export type GetCustomersRes = {

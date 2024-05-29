@@ -21,7 +21,7 @@ export const Transactions = () => {
   const {
     data: { data: transactions } = {},
     isError: isFetchingAllTranscationError,
-    isPending: isFetchingTransactions,
+    isLoading: isFetchingTransactions,
     error: fetchTransactionsError,
   } = useQuery<AxiosResponse<GetAllAcceptedTransactionRes>, AppErrorResponse>({
     queryKey: ['get-transactions'],

@@ -23,7 +23,7 @@ export const CustomerList = () => {
 
   const currentId = useRef('')
 
-  const [query, setQuery] = useState<Required<GetCustomerReq['query']>>({
+  const [query, setQuery] = useState<Required<GetCustomerReq>>({
     limit: 10,
     page: 1,
   })
@@ -34,10 +34,7 @@ export const CustomerList = () => {
     error: customerListError,
   } = useQuery<AxiosResponse<GetCustomersRes>, AppErrorResponse>({
     queryKey: ['get-customers', query.limit, query.page],
-    queryFn: () =>
-      getCustomers({
-        query,
-      }),
+    queryFn: () => getCustomers(query),
   })
   const customerList = customerResponse?.data.data
 

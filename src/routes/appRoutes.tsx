@@ -10,9 +10,9 @@ import { Login } from '../pages/Login'
 import { Transactions } from '../pages/Transactions'
 import { CustomerList, CustomerProfile } from '../pages/Customer'
 import { CategoriesList } from '../pages/Categories/CategoriesList'
+import { AdminProfile } from '../pages/AdminProfile'
 
 export const appRoutes = createBrowserRouter(
-  //TODO: create wrong route error element
   createRoutesFromElements(
     <Route path={APP_PATHS.landing} element={<App />}>
       <Route element={<LoginLayout />}>
@@ -24,7 +24,7 @@ export const appRoutes = createBrowserRouter(
         <Route path={APP_PATHS.customerProfile} element={<CustomerProfile />} />
         <Route path={APP_PATHS.customers} element={<CustomerList />} />
         <Route path={APP_PATHS.dashboard} element={<div>dash</div>} />
-        <Route path={APP_PATHS.profile} element={<div>prof</div>} />
+        <Route path={APP_PATHS.profile} element={<AdminProfile />} />
         <Route
           path={APP_PATHS.postsRequest}
           element={<div>posts requests</div>}

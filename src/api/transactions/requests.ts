@@ -16,9 +16,8 @@ export const getAllAcceptedTransaction = async (): Promise<
 export const getTransactionDetails = async (
   reqBody: GetTransactionDetailsReq
 ): Promise<AxiosResponse<GetTransactionDetailsRes>> => {
-  const response = await axiosInstance.post(
-    '/listExchangedItemsDetails',
-    reqBody
-  )
+  const response = await axiosInstance.get('/listExchangedItemsDetails', {
+    params: reqBody,
+  })
   return response
 }

@@ -11,7 +11,9 @@ import {
 export const getCustomers = async (
   reqBody: GetCustomerReq
 ): Promise<AxiosResponse<GetCustomersRes>> => {
-  const response = await axiosInstance.post('/', reqBody)
+  const response = await axiosInstance.get('/', {
+    params: reqBody,
+  })
   return response
 }
 
