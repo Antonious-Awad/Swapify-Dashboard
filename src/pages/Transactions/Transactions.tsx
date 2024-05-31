@@ -63,11 +63,11 @@ export const Transactions = () => {
       columns={TransactionTableColumns}
       dataSource={transactions}
       loading={isFetchingTransactions}
-      rowKey={'request_id'}
+      rowKey={({ _id }) => _id}
       expandable={{
-        expandedRowRender: (record) => <div>{record.request_id}</div>,
-        onExpand: (expand, { request_id }) => {
-          if (expand) fetchTransactionDetails({ requestId: request_id })
+        expandedRowRender: (record) => <div>{record._id}</div>,
+        onExpand: (expand, { _id }) => {
+          if (expand) fetchTransactionDetails({ requestId: _id })
         },
       }}
     />

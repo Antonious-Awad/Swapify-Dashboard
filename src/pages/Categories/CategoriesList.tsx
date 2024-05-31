@@ -6,12 +6,13 @@ import {
   getCategories,
 } from '../../api/categories'
 import { AppErrorResponse, Category } from '../../common/types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useModal } from '../../hooks'
-import { Button, Flex, Space, Table } from 'antd'
+import { Button, Flex, Modal, Space, Table } from 'antd'
 import { categoriesListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { PlusCircleOutlined } from '@ant-design/icons'
+import { CreateCategory } from './CreateCategory'
 
 export const CategoriesList = () => {
   const { activateModal } = useModal()
@@ -19,7 +20,7 @@ export const CategoriesList = () => {
   const { notification } = useNotificationContext()
 
   const currentCategoryId = useRef('')
-
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
   const queryClient = useQueryClient()
 
   const {
@@ -67,27 +68,54 @@ export const CategoriesList = () => {
   }, [isCategoriesError])
 
   return (
-    <Space size={'middle'} direction="vertical" className="w-full mt-3">
-      <Flex justify="end">
-        <Button icon={<PlusCircleOutlined />} ghost>
-          Create
-        </Button>
-      </Flex>
-      <Table<Category>
-        dataSource={categories?.data.data}
-        rowKey={'id'}
-        columns={categoriesListColumns(
-          deleteCategory,
-          isDeleting,
-          currentCategoryId.current
-        )}
-        loading={isFetchingCategories}
-        onRow={({ id }) => ({
-          onClick: () => {
-            currentCategoryId.current = id
+    <>
+      <Space size={'middle'} direction="vertical" className="w-full mt-3">
+        <Flex justify="end">
+          <Button
+            icon={<PlusCircleOutlined />}
+            ghost
+            onClick={() => setIsCreateOpen(true)}
+          >
+            Create
+          </Button>
+        </Flex>
+        <Table<Category>
+          dataSource={categories?.data.data}
+          rowKey={'id'}
+          columns={categoriesListColumns(
+            deleteCategory,
+            isDeleting,
+            currentCategoryId.current
+          )}
+          loading={isFetchingCategories}
+          onRow={({ id }) => ({
+            onClick: () => {
+              currentCategoryId.current = id
+            },
+          })}
+        />
+      </Space>
+      <Modal
+        open={isCreateOpen}
+        onCancel={() => setIsCreateOpen(false)}
+        destroyOnClose
+        title="Create Category"
+        maskClosable
+        closable={false}
+        okText="Submit"
+        okButtonProps={{
+          style: {
+            display: 'none',
           },
-        })}
-      />
-    </Space>
+        }}
+        cancelButtonProps={{
+          style: {
+            display: 'none',
+          },
+        }}
+      >
+        <CreateCategory onClose={() => setIsCreateOpen(false)} />
+      </Modal>
+    </>
   )
 }

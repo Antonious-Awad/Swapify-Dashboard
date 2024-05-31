@@ -13,7 +13,6 @@ export const Sidebar = () => {
   const routePath = useLocation().pathname.split('/')
   const navigate = useNavigate()
 
-  console.log(collapse)
   return (
     <Sider collapsible trigger={null} width={'18%'} collapsed={collapse}>
       <div

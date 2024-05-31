@@ -32,7 +32,7 @@ export const categoriesListColumns = (
     dataIndex: 'createdAt',
     key: 'createdAt',
     title: 'Created',
-    render: (createdAt: Customer['createdAt']) => formatToDDMMMYYYY(createdAt),
+    render: (createdAt: Customer['created_at']) => formatToDDMMMYYYY(createdAt),
   },
   {
     key: 'action',
@@ -50,3 +50,10 @@ export const categoriesListColumns = (
     },
   },
 ]
+
+export const normalizeUploadFile = (e: any) => {
+  if (Array.isArray(e)) {
+    return e
+  }
+  return e?.fileList
+}

@@ -32,10 +32,10 @@ export const customerListColumns = ({
     title: 'Phone Number',
   },
   {
-    dataIndex: 'createdAt',
-    key: 'createdAt',
+    dataIndex: 'created_at',
+    key: 'created_at',
     title: 'Created',
-    render: (createdAt: Customer['createdAt']) => formatToDDMMMYYYY(createdAt),
+    render: (createdAt: Customer['created_at']) => formatToDDMMMYYYY(createdAt),
   },
   {
     key: 'action',
