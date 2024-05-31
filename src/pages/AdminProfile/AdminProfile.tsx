@@ -7,8 +7,11 @@ import {
   Avatar,
   Button,
   Card,
+  Col,
   Flex,
   FloatButton,
+  Modal,
+  Row,
   Space,
   Typography,
 } from 'antd'
@@ -19,12 +22,14 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { useEffect, useState } from 'react'
+import { EditAdminInfo } from './EditAdminInfo'
 
 export const AdminProfile = () => {
   const { activateModal } = useModal()
   const { Title, Text } = Typography
 
   const [canViewPassword, setCanViewPassword] = useState(false)
+  const [isEditInfo, setIsEditInfo] = useState(false)
 
   const {
     data: adminInfoRes,
@@ -61,70 +66,109 @@ export const AdminProfile = () => {
   }
 
   return (
-    <div className="p-4">
-      <div className="flex items-center">
-        <Avatar size={120} icon={<UserOutlined />} src={adminInfo?.image} />
-      </div>
-      <Title level={3} className="my-[3rem]">
-        Personal Info
-      </Title>
-      {/* TODO: Fix Gaps */}
-      <div className="grid grid-cols-2 gap-x-[4rem] gap-y-[2rem]">
-        {personalInfoKeys.map((field) => {
-          return (
-            <Card loading={isFetchingAdminInfo} className="w-[25rem]">
-              <Space size="middle" direction="vertical" className="w-full">
-                <Text className="text-[18px] text-neutral-300">
-                  {adminInfoTitles[field]}
-                </Text>
-                <Text className="text-[20px] font-semibold">
-                  {field === 'location'
-                    ? `${adminInfo?.location.governorate}, ${adminInfo?.location.city}`
-                    : adminInfo?.[field]}
-                </Text>
-              </Space>
-            </Card>
-          )
-        })}
-      </div>
-      <Title level={3} className="my-[3rem]">
-        Sign In Method
-      </Title>
-      <div className="grid grid-cols-2 gap-x-[4rem] gap-y-[2rem]">
-        {signInMethodKeys.map((field) => {
-          if (field === 'location') return
-          return (
-            <Card loading={isFetchingAdminInfo} className="w-[25rem]">
-              <Space size="middle" direction="vertical" className="w-full">
-                <Text className="text-[18px] text-neutral-300">
-                  {adminInfoTitles[field]}
-                </Text>
-                <Flex justify="space-between">
-                  <Text className="text-[20px] font-semibold px-2">
-                    {field === 'password' && !canViewPassword
-                      ? '*********'
-                      : adminInfo?.[field]}
-                  </Text>
-                  {field === 'password' && (
-                    <Button
-                      type="link"
-                      onClick={() => setCanViewPassword(!canViewPassword)}
-                      className="p-0"
-                    >
-                      {canViewPassword ? (
-                        <EyeOutlined />
-                      ) : (
-                        <EyeInvisibleOutlined />
+    <>
+      <div className="p-4">
+        <div className="flex items-center">
+          <Avatar size={120} icon={<UserOutlined />} src={adminInfo?.image} />
+        </div>
+        <Title level={3} className="my-[3rem]">
+          Personal Info
+        </Title>
+        <Row gutter={[40, 20]}>
+          {personalInfoKeys.map((field) => {
+            return (
+              <Col md={12} lg={8} key={field}>
+                <Card loading={isFetchingAdminInfo} className="w-[25rem]">
+                  <Space size="middle" direction="vertical" className="w-full">
+                    <Text className="text-[18px] text-neutral-300">
+                      {adminInfoTitles[field]}
+                    </Text>
+                    <Text className="text-[20px] font-semibold">
+                      {field === 'location'
+                        ? `${adminInfo?.location.city}, ${adminInfo?.location.governorate}`
+                        : adminInfo?.[field]}
+                    </Text>
+                  </Space>
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
+        <Title level={3} className="my-[3rem]">
+          Sign In Method
+        </Title>
+        <Row gutter={[40, 20]}>
+          {signInMethodKeys.map((field) => {
+            if (field === 'location') return
+            return (
+              <Col md={12} lg={8} key={field}>
+                <Card
+                  loading={isFetchingAdminInfo}
+                  className="w-[25rem]"
+                  key={field}
+                >
+                  <Space size="middle" direction="vertical" className="w-full">
+                    <Text className="text-[18px] text-neutral-300">
+                      {adminInfoTitles[field]}
+                    </Text>
+                    <Flex justify="space-between">
+                      <Text className="text-[20px] font-semibold px-2">
+                        {field === 'password' && !canViewPassword
+                          ? '*********'
+                          : adminInfo?.[field]}
+                      </Text>
+                      {field === 'password' && (
+                        <Button
+                          type="link"
+                          onClick={() => setCanViewPassword(!canViewPassword)}
+                          className="p-0"
+                        >
+                          {canViewPassword ? (
+                            <EyeOutlined />
+                          ) : (
+                            <EyeInvisibleOutlined />
+                          )}
+                        </Button>
                       )}
-                    </Button>
-                  )}
-                </Flex>
-              </Space>
-            </Card>
-          )
-        })}
+                    </Flex>
+                  </Space>
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
       </div>
-      <FloatButton icon={<EditOutlined />} tooltip={'Edit Admin Info'} />
-    </div>
+      <FloatButton
+        icon={<EditOutlined />}
+        tooltip={'Edit Admin Info'}
+        onClick={() => setIsEditInfo(true)}
+      />
+      <Modal
+        open={isEditInfo}
+        onCancel={() => setIsEditInfo(false)}
+        destroyOnClose
+        title="Edit Admin Info"
+        maskClosable
+        closable={false}
+        okText="Submit"
+        okButtonProps={{
+          style: {
+            display: 'none',
+          },
+        }}
+        cancelButtonProps={{
+          style: {
+            display: 'none',
+          },
+        }}
+      >
+        {adminInfo && (
+          <EditAdminInfo
+            adminInfo={adminInfo}
+            onClose={() => setIsEditInfo(false)}
+          />
+        )}
+      </Modal>
+    </>
   )
 }

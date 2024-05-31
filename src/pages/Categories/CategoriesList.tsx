@@ -33,7 +33,7 @@ export const CategoriesList = () => {
     queryFn: getCategories,
   })
 
-  const { isPending: isDeleting } = useMutation<
+  const { isPending: isDeleting, mutate: deletCategoryMutate } = useMutation<
     DeleteCategoryRes,
     DeleteCategoryRes,
     string
@@ -83,7 +83,7 @@ export const CategoriesList = () => {
           dataSource={categories?.data.data}
           rowKey={'id'}
           columns={categoriesListColumns(
-            deleteCategory,
+            deletCategoryMutate,
             isDeleting,
             currentCategoryId.current
           )}

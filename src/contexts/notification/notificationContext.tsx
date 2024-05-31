@@ -17,6 +17,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
       if (type !== 'destroy') {
         api[type]({
           ...config,
+          duration: config.duration || 2,
           placement: 'topRight',
         })
       }

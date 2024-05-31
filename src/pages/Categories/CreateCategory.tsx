@@ -7,23 +7,29 @@ import {
   Upload,
   UploadProps,
 } from 'antd'
-import { CategoryForm, CreateCategoryProps } from './types'
+import { CategoryForm } from './types'
 import { Input } from '../../components/Input'
 import { normalizeUploadFile } from './config'
 import { PlusOutlined } from '@ant-design/icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCategory } from '../../api/categories'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
-import { AppErrorResponse, DefaultApiResponse } from '../../common/types'
+import {
+  AppErrorResponse,
+  BaseModalProps,
+  DefaultApiResponse,
+} from '../../common/types'
+import { useModal } from '../../hooks'
 
-export const CreateCategory = ({ onClose }: CreateCategoryProps) => {
+export const CreateCategory = ({ onClose }: BaseModalProps) => {
   const [form] = Form.useForm<CategoryForm>()
 
   const { notification } = useNotificationContext()
-  const { invalidateQueries } = useQueryClient()
+  const { activateModal } = useModal()
+  const queryClient = useQueryClient()
 
   // Used to override antd forcing of a request
-  const dummyRequest: UploadProps['customRequest'] = ({ file, onSuccess }) => {
+  const dummyRequest: UploadProps['customRequest'] = ({ onSuccess }) => {
     setTimeout(() => {
       onSuccess?.('ok')
     }, 0)
@@ -39,14 +45,15 @@ export const CreateCategory = ({ onClose }: CreateCategoryProps) => {
     onSuccess: (res) => {
       notification('success', {
         message: res.data.message || 'Creating Category Succeeded',
+        onClose: () => onClose(),
       })
-      invalidateQueries({ queryKey: ['get-categories'] })
-      onClose()
+      queryClient.invalidateQueries({ queryKey: ['get-categories'] })
     },
     onError: (err) => {
-      notification('error', {
-        message: err.response?.data.message,
-      })
+      activateModal(
+        'danger',
+        err.response?.data.message || 'Error creating category'
+      )
     },
   })
 
@@ -65,20 +72,20 @@ export const CreateCategory = ({ onClose }: CreateCategoryProps) => {
         <Form.Item noStyle shouldUpdate>
           {({ getFieldValue }) => {
             const image = getFieldValue('image')
-            console.log(image)
             return (
               <Form.Item
                 name={'image'}
                 messageVariables={{ label: 'Image' }}
                 valuePropName="fileList"
                 normalize={normalizeUploadFile}
+                rules={[{ required: true }]}
               >
                 <Upload
                   action={'none'}
                   listType="picture-card"
                   className="cursor-pointer"
                   multiple={false}
-                  accept="Image"
+                  accept=".png, .jpg, .jpeg"
                   disabled={!!image?.length}
                   showUploadList={{
                     showDownloadIcon: false,

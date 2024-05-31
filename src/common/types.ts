@@ -1,11 +1,11 @@
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 
 export type TableTransaction = {
   From: string
   To: string
   creation_date: string
   offered_item_name?: string
-  request_id: string
+  _id: string
   requested_item_name?: string
 }
 
@@ -20,7 +20,7 @@ export type Location = {
   city: string
 }
 export type Customer = {
-  createdAt: string
+  created_at: string
   updatedAt: string
   email: string
   favorites: string[]
@@ -55,4 +55,22 @@ export type CustomerRequest = {
   offeredItemTitle: string
   requestedItemTitle: string
   timeAgo: string
+}
+
+export type DefaultApiResponse = AxiosResponse<{
+  success: boolean
+  message: string
+}>
+
+export type BaseModalProps = {
+  onClose: () => void
+}
+
+export type AdminInfo = {
+  username: string
+  email: string
+  phone: string
+  password: string
+  location: Location
+  image: string
 }

@@ -11,7 +11,11 @@ export const CustomerCard = ({
     <Card bordered={false} className="m-auto mt-[3rem]" loading={isLoading}>
       <Row gutter={24} align={'middle'}>
         <Col span={3}>
-          <Avatar size={100} icon={<UserOutlined />} />
+          <Avatar
+            size={100}
+            icon={<UserOutlined />}
+            src={customerDetails?.image}
+          />
         </Col>
         <Col span={5} className="mb-[1rem]">
           <Title level={3}>{customerDetails?.username}</Title>
