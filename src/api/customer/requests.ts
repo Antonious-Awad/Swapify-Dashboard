@@ -11,7 +11,7 @@ import {
 export const getCustomers = async (
   reqBody: GetCustomerReq
 ): Promise<AxiosResponse<GetCustomersRes>> => {
-  const response = await axiosInstance.get('/', {
+  const response = await axiosInstance.get('/Admin/', {
     params: reqBody,
   })
   return response
@@ -20,7 +20,7 @@ export const getCustomers = async (
 export const deleteCustomer = async (
   id: string
 ): Promise<AxiosResponse<DeleteCustomerRes>> => {
-  const response = await axiosInstance.delete(`/deleteUser/${id}`)
+  const response = await axiosInstance.delete(`/Admin/deleteUser/${id}`)
 
   return response
 }
@@ -29,7 +29,7 @@ export const getCustomerInfo = async (
   id: string
 ): Promise<AxiosResponse<GetCustomerInfoRes>> => {
   const response = await axiosInstance.get(
-    `/InfoWithNumberOfRequestsPosts/${id}`
+    `/Admin/InfoWithNumberOfRequestsPosts/${id}`
   )
   return response
 }
@@ -37,6 +37,6 @@ export const getCustomerInfo = async (
 export const getCustomerRequests = async (
   id: string
 ): Promise<AxiosResponse<GetCustomerRequestsRes>> => {
-  const response = await axiosInstance.get(`/ListUserRequests/${id}`)
+  const response = await axiosInstance.get(`/Admin/ListUserRequests/${id}`)
   return response
 }

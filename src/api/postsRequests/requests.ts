@@ -16,6 +16,6 @@ export const updateItemStatus = async ({
   itemId,
   status,
 }: UpdateStatusReq): Promise<DefaultApiResponse> => {
-  const response = axiosInstance.put(`/status/${itemId}`, { status })
+  const response = axiosInstance.put(`/Admin/status/${itemId}`, { status })
   return response
 }

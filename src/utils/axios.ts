@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { checkValidToken, getSessionsToken } from './token'
 
-const API_URL = 'http://localhost:8000/Admin'
+const API_URL = 'http://localhost:8000'
 
 const axiosInstance = axios.create({ baseURL: API_URL })
 

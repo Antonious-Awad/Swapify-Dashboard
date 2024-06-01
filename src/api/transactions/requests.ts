@@ -9,14 +9,16 @@ import {
 export const getAllAcceptedTransaction = async (): Promise<
   AxiosResponse<GetAllAcceptedTransactionRes>
 > => {
-  const response = await axiosInstance.get('/listAcceptedExchangeRequests')
+  const response = await axiosInstance.get(
+    '/Admin/listAcceptedExchangeRequests'
+  )
   return response
 }
 
 export const getTransactionDetails = async (
   reqBody: GetTransactionDetailsReq
 ): Promise<AxiosResponse<GetTransactionDetailsRes>> => {
-  const response = await axiosInstance.get('/listExchangedItemsDetails', {
+  const response = await axiosInstance.get('/Admin/listExchangedItemsDetails', {
     params: reqBody,
   })
   return response
