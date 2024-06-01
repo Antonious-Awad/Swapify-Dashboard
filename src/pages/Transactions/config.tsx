@@ -7,7 +7,7 @@ export const TransactionTableColumns: TableProps<TableTransaction>['columns'] =
     {
       key: 'request-id',
       title: 'TRANSACTION ID',
-      dataIndex: '_id',
+      dataIndex: 'request_id',
     },
     {
       dataIndex: 'creation_date',

@@ -1,5 +1,5 @@
 import { Button, Layout, Menu, MenuProps } from 'antd'
-import { Collapse, TrdLogo } from '../icons'
+import { Collapse, SwapifyLogo } from '../icons'
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
@@ -22,7 +22,7 @@ export const Sidebar = () => {
           {collapse ? (
             <CollapsedTRDLogo width="76" height="22" />
           ) : (
-            <TrdLogo width="76" height="22" />
+            <SwapifyLogo width="76" height="22" />
           )}
         </Link>
         <Button type="link" onClick={() => setCollapse(!collapse)}>

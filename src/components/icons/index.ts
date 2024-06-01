@@ -1,5 +1,5 @@
 export * from './Email'
-export * from './TrdLogo'
+export * from './SwapifyLogo'
 export * from './types'
 export * from './Lock'
 export * from './Wrong'
