@@ -1,7 +1,7 @@
-import { Button, Popconfirm, Row, Space, TableProps } from 'antd'
+import { Avatar, Button, Col, Popconfirm, Row, Space, TableProps } from 'antd'
 import { Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
-import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
 import { CustomerListColumns } from './types'
 
 export const customerListColumns = ({
@@ -19,10 +19,17 @@ export const customerListColumns = ({
     dataIndex: 'username',
     key: 'name',
     title: 'Name',
-    render: (username: Customer['username'], { email }) => (
+    render: (username: Customer['username'], { email, image }) => (
       <>
-        <Row className="font-semibold text-brand-400">{username}</Row>
-        <Row className="text-neutral-300">{email}</Row>
+        <Row align={'middle'}>
+          <Col span={4}>
+            <Avatar src={image} icon={<UserOutlined />} size={32} />
+          </Col>
+          <Col>
+            <Row className="font-semibold text-brand-400">{username}</Row>
+            <Row className="text-neutral-300">{email}</Row>
+          </Col>
+        </Row>
       </>
     ),
   },
