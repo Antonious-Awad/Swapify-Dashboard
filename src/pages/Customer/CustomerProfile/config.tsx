@@ -1,4 +1,4 @@
-import { TableProps } from 'antd'
+import { Table, TableProps } from 'antd'
 import { CustomerRequest } from '../../../common/types'
 
 export const customerRequestsColumns = (
@@ -34,4 +34,5 @@ export const customerRequestsColumns = (
     key: 'requested-item',
     title: 'ITEM',
   },
+  Table.EXPAND_COLUMN,
 ]

@@ -18,6 +18,7 @@ import { TransactionDetails } from '../../components/TransactionDetails'
 
 export const Transactions = () => {
   const { activateModal } = useModal()
+
   const [expandedRowDetails, setExpandedRowDetails] = useState<{
     [key: string]: GetTransactionDetailsRes | undefined
   }>({})

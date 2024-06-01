@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 import {
   GetCustomerInfoRes,
@@ -8,17 +8,31 @@ import {
 } from '../../../api/customer'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useModal } from '../../../hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AppErrorResponse, CustomerRequest } from '../../../common/types'
 import { CustomerCard } from '../../../components/CustomerCard/CustomerCard'
-import { Divider, Table } from 'antd'
+import { Divider, Empty, Table } from 'antd'
 import { useNotificationContext } from '../../../contexts/notification/notificationContext'
 import { customerRequestsColumns } from './config'
+import {
+  GetTransactionDetailsReq,
+  GetTransactionDetailsRes,
+} from '../../../api/transactions/types'
+import { getTransactionDetails } from '../../../api/transactions'
+import { TransactionDetails } from '../../../components/TransactionDetails'
 
 export const CustomerProfile = () => {
   const { customerId } = useLocation().state
   const { activateModal } = useModal()
   const { notification } = useNotificationContext()
+
+  const [expandedRowDetails, setExpandedRowDetails] = useState<{
+    [key: string]: GetTransactionDetailsRes | undefined
+  }>({})
+  const [loadingRows, setLoadingRows] = useState<{ [key: string]: boolean }>({})
+  const [errorRows, setErrorRows] = useState<{
+    [key: string]: string | undefined
+  }>({})
 
   const {
     isLoading: isFetchingCustomerDetails,
@@ -47,6 +61,28 @@ export const CustomerProfile = () => {
     queryFn: () => getCustomerRequests(customerId),
     retry: 0,
   })
+  const { mutate: fetchDetails } = useMutation<
+    AxiosResponse<GetTransactionDetailsRes>,
+    AppErrorResponse,
+    GetTransactionDetailsReq
+  >({
+    mutationFn: getTransactionDetails,
+    onSuccess: (data, variables) => {
+      setExpandedRowDetails((prev) => ({
+        ...prev,
+        [variables.requestId]: data.data,
+      }))
+      setLoadingRows((prev) => ({ ...prev, [variables.requestId]: false }))
+    },
+    onError: (error, variables) => {
+      setErrorRows((prev) => ({
+        ...prev,
+        [variables.requestId]:
+          error.response?.data.error || 'Error fetching details',
+      }))
+      setLoadingRows((prev) => ({ ...prev, [variables.requestId]: false }))
+    },
+  })
 
   useEffect(() => {
     if (isCustomerDetailsError) {
@@ -70,6 +106,14 @@ export const CustomerProfile = () => {
     customerRequestsError,
   ])
 
+  const handleExpand = (expanded: boolean, record: CustomerRequest) => {
+    if (expanded) {
+      setLoadingRows((prev) => ({ ...prev, [record.requestId]: true }))
+      setErrorRows((prev) => ({ ...prev, [record.requestId]: undefined }))
+      fetchDetails({ requestId: record.requestId })
+    }
+  }
+
   return (
     <>
       <CustomerCard
@@ -82,6 +126,25 @@ export const CustomerProfile = () => {
         dataSource={customerRequests?.data.data}
         columns={customerRequestsColumns(customerDetails?.username || '')}
         rowKey={(request) => request.requestId}
+        expandable={{
+          expandedRowRender: (record) => {
+            const transactionDetails = expandedRowDetails[record.requestId]
+            const isLoading = loadingRows[record.requestId]
+            const error = errorRows[record.requestId]
+
+            if (error) {
+              return <Empty description={error} />
+            }
+
+            return (
+              <TransactionDetails
+                transactionDetails={transactionDetails}
+                isLoading={isLoading}
+              />
+            )
+          },
+          onExpand: handleExpand,
+        }}
       />
     </>
   )
