@@ -1,9 +1,11 @@
-import { Customer, CustomerRequest, Location } from '../../common/types'
+import {
+  Customer,
+  CustomerRequest,
+  Location,
+  Pagination,
+} from '../../common/types'
 
-export type GetCustomerReq = {
-  limit?: number
-  page?: number
-}
+export type GetCustomerReq = Pagination
 
 export type GetCustomersRes = {
   currentPage: number

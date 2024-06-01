@@ -11,6 +11,7 @@ import { Transactions } from '../pages/Transactions'
 import { CustomerList, CustomerProfile } from '../pages/Customer'
 import { CategoriesList } from '../pages/Categories/CategoriesList'
 import { AdminProfile } from '../pages/AdminProfile'
+import { PostsRequests } from '../pages/PostsRequests'
 
 export const appRoutes = createBrowserRouter(
   createRoutesFromElements(
@@ -25,10 +26,7 @@ export const appRoutes = createBrowserRouter(
         <Route path={APP_PATHS.customers} element={<CustomerList />} />
         <Route path={APP_PATHS.dashboard} element={<div>dash</div>} />
         <Route path={APP_PATHS.profile} element={<AdminProfile />} />
-        <Route
-          path={APP_PATHS.postsRequest}
-          element={<div>posts requests</div>}
-        />
+        <Route path={APP_PATHS.postsRequest} element={<PostsRequests />} />
       </Route>
     </Route>
   )

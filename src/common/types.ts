@@ -5,7 +5,7 @@ export type TableTransaction = {
   To: string
   creation_date: string
   offered_item_name?: string
-  _id: string
+  request_id: string
   requested_item_name?: string
 }
 
@@ -73,4 +73,26 @@ export type AdminInfo = {
   password: string
   location: Location
   image: string
+}
+
+export type PostRequestItem = {
+  _id: string
+  title: string
+  Descreption: string
+  price: number
+  category: string
+  user: string
+  condition: boolean
+  slug: string
+  image: string
+  status: 'pending' | 'accepted' | 'rejected' | 'expired'
+  updatedAt: string
+  __v: number
+  created_at: string
+  updated_at: string
+}
+
+export type Pagination = {
+  page?: number
+  limit?: number
 }

@@ -73,9 +73,9 @@ export const Transactions = () => {
 
   const handleExpand = (expanded: boolean, record: TableTransaction) => {
     if (expanded) {
-      setLoadingRows((prev) => ({ ...prev, [record._id]: true }))
-      setErrorRows((prev) => ({ ...prev, [record._id]: undefined }))
-      fetchDetails({ requestId: record._id })
+      setLoadingRows((prev) => ({ ...prev, [record.request_id]: true }))
+      setErrorRows((prev) => ({ ...prev, [record.request_id]: undefined }))
+      fetchDetails({ requestId: record.request_id })
     }
   }
 
@@ -84,12 +84,12 @@ export const Transactions = () => {
       columns={TransactionTableColumns}
       dataSource={transactions}
       loading={isFetchingTransactions}
-      rowKey={({ _id }) => _id}
+      rowKey={({ request_id: _id }) => _id}
       expandable={{
         expandedRowRender: (record) => {
-          const transactionDetails = expandedRowDetails[record._id]
-          const isLoading = loadingRows[record._id]
-          const error = errorRows[record._id]
+          const transactionDetails = expandedRowDetails[record.request_id]
+          const isLoading = loadingRows[record.request_id]
+          const error = errorRows[record.request_id]
 
           if (error) {
             return <Empty description={error} />
