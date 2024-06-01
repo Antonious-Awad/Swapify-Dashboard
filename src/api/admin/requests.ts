@@ -17,3 +17,10 @@ export const updateAdminInfo = async (
   const response = await axiosInstance.put('/updateAdminInfo', reqbody)
   return response
 }
+
+export const updateAdminPhoto = async (
+  reqBody: FormData
+): Promise<DefaultApiResponse> => {
+  const response = await axiosInstance.post('/UploadAdminPhoto', reqBody)
+  return response
+}

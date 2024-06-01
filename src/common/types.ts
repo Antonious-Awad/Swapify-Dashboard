@@ -10,7 +10,7 @@ export type TableTransaction = {
 }
 
 export type ExchangeItem = {
-  description: string
+  Descreption: string
   price: number
   title: string
 }

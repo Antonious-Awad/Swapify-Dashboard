@@ -1,8 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useModal } from '../../hooks'
-import { GetAdminInfoRes, getAdminInfo } from '../../api/admin'
+import {
+  GetAdminInfoRes,
+  getAdminInfo,
+  updateAdminPhoto,
+} from '../../api/admin'
 import { AxiosResponse } from 'axios'
-import { AppErrorResponse } from '../../common/types'
+import { AppErrorResponse, DefaultApiResponse } from '../../common/types'
 import {
   Avatar,
   Button,
@@ -21,15 +25,20 @@ import {
   EyeOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EditAdminInfo } from './EditAdminInfo'
+import { useNotificationContext } from '../../contexts/notification/notificationContext'
+import { uploadAdminPhotoHandler } from './config'
 
 export const AdminProfile = () => {
   const { activateModal } = useModal()
+  const { notification } = useNotificationContext()
   const { Title, Text } = Typography
 
   const [canViewPassword, setCanViewPassword] = useState(false)
   const [isEditInfo, setIsEditInfo] = useState(false)
+  const uploaderRef = useRef<HTMLInputElement>(null)
+  const queryClient = useQueryClient()
 
   const {
     data: adminInfoRes,
@@ -39,6 +48,28 @@ export const AdminProfile = () => {
   } = useQuery<AxiosResponse<GetAdminInfoRes>, AppErrorResponse>({
     queryKey: ['get-admin-info'],
     queryFn: getAdminInfo,
+  })
+
+  const { mutate: updatePhoto, isPending: isUploadingPhoto } = useMutation<
+    DefaultApiResponse,
+    AppErrorResponse,
+    FormData
+  >({
+    mutationFn: updateAdminPhoto,
+    mutationKey: ['update-admin-photo'],
+    onSuccess: (res) => {
+      notification('success', {
+        message: res.data.message || 'Admin Photo Successfully updated',
+        onClose: () =>
+          queryClient.invalidateQueries({ queryKey: ['get-admin-info'] }),
+      })
+    },
+    onError: (err) => {
+      activateModal(
+        'danger',
+        err.response?.data.message || 'Admin Photo failed to upload'
+      )
+    },
   })
 
   const adminInfo = adminInfoRes?.data.data
@@ -68,8 +99,30 @@ export const AdminProfile = () => {
   return (
     <>
       <div className="p-4">
-        <div className="flex items-center">
-          <Avatar size={120} icon={<UserOutlined />} src={adminInfo?.image} />
+        <div className="relative w-min">
+          <Avatar
+            size={120}
+            icon={<UserOutlined />}
+            src={adminInfo?.image}
+            className="relative"
+          />
+          <div className="absolute bottom-0 right-0">
+            <Button
+              type="link"
+              icon={<EditOutlined />}
+              className="bg-brand-100 rounded-full border text-neutral-300"
+              loading={isUploadingPhoto}
+              onClick={() => uploaderRef.current?.click()}
+            />
+            <input
+              type="file"
+              ref={uploaderRef}
+              hidden
+              onChange={(e) => uploadAdminPhotoHandler(updatePhoto, e)}
+              accept=".png, .jpeg, .jpg"
+              multiple={false}
+            />
+          </div>
         </div>
         <Title level={3} className="my-[3rem]">
           Personal Info

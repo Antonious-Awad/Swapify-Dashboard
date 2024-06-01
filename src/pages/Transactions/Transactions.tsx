@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   getAllAcceptedTransaction,
@@ -5,7 +6,7 @@ import {
 } from '../../api/transactions/requests'
 import { useModal } from '../../hooks'
 import { AxiosResponse } from 'axios'
-import { Table } from 'antd'
+import { Empty, Table } from 'antd'
 import { AppErrorResponse, TableTransaction } from '../../common/types'
 import { TransactionTableColumns } from './config'
 import {
@@ -13,14 +14,21 @@ import {
   GetTransactionDetailsReq,
   GetTransactionDetailsRes,
 } from '../../api/transactions/types'
-import { useEffect } from 'react'
+import { TransactionDetails } from '../../components/TransactionDetails'
 
 export const Transactions = () => {
   const { activateModal } = useModal()
+  const [expandedRowDetails, setExpandedRowDetails] = useState<{
+    [key: string]: GetTransactionDetailsRes | undefined
+  }>({})
+  const [loadingRows, setLoadingRows] = useState<{ [key: string]: boolean }>({})
+  const [errorRows, setErrorRows] = useState<{
+    [key: string]: string | undefined
+  }>({})
 
   const {
     data: { data: transactions } = {},
-    isError: isFetchingAllTranscationError,
+    isError: isFetchingAllTransactionError,
     isLoading: isFetchingTransactions,
     error: fetchTransactionsError,
   } = useQuery<AxiosResponse<GetAllAcceptedTransactionRes>, AppErrorResponse>({
@@ -29,26 +37,31 @@ export const Transactions = () => {
     retry: 2,
   })
 
-  //TODO: Finalize the expand UI and logic
-  const { isPending: isFetchingDetails, mutate: fetchTransactionDetails } =
-    useMutation<
-      AxiosResponse<GetTransactionDetailsRes>,
-      AppErrorResponse,
-      GetTransactionDetailsReq
-    >({
-      mutationFn: getTransactionDetails,
-      mutationKey: ['get-transaction-details'],
-      onError: (err) =>
-        activateModal(
-          'danger',
-          err.response?.data.error ||
-            err.response?.data.message ||
-            'Fetching Transactions Failed'
-        ),
-    })
+  const { mutate: fetchDetails } = useMutation<
+    AxiosResponse<GetTransactionDetailsRes>,
+    AppErrorResponse,
+    GetTransactionDetailsReq
+  >({
+    mutationFn: getTransactionDetails,
+    onSuccess: (data, variables) => {
+      setExpandedRowDetails((prev) => ({
+        ...prev,
+        [variables.requestId]: data.data,
+      }))
+      setLoadingRows((prev) => ({ ...prev, [variables.requestId]: false }))
+    },
+    onError: (error, variables) => {
+      setErrorRows((prev) => ({
+        ...prev,
+        [variables.requestId]:
+          error.response?.data.error || 'Error fetching details',
+      }))
+      setLoadingRows((prev) => ({ ...prev, [variables.requestId]: false }))
+    },
+  })
 
   useEffect(() => {
-    if (isFetchingAllTranscationError) {
+    if (isFetchingAllTransactionError) {
       activateModal(
         'danger',
         fetchTransactionsError.response?.data.error ||
@@ -56,7 +69,15 @@ export const Transactions = () => {
           'Fetching Transactions Failed'
       )
     }
-  }, [isFetchingAllTranscationError])
+  }, [isFetchingAllTransactionError])
+
+  const handleExpand = (expanded: boolean, record: TableTransaction) => {
+    if (expanded) {
+      setLoadingRows((prev) => ({ ...prev, [record._id]: true }))
+      setErrorRows((prev) => ({ ...prev, [record._id]: undefined }))
+      fetchDetails({ requestId: record._id })
+    }
+  }
 
   return (
     <Table<TableTransaction>
@@ -65,10 +86,23 @@ export const Transactions = () => {
       loading={isFetchingTransactions}
       rowKey={({ _id }) => _id}
       expandable={{
-        expandedRowRender: (record) => <div>{record._id}</div>,
-        onExpand: (expand, { _id }) => {
-          if (expand) fetchTransactionDetails({ requestId: _id })
+        expandedRowRender: (record) => {
+          const transactionDetails = expandedRowDetails[record._id]
+          const isLoading = loadingRows[record._id]
+          const error = errorRows[record._id]
+
+          if (error) {
+            return <Empty description={error} />
+          }
+
+          return (
+            <TransactionDetails
+              transactionDetails={transactionDetails}
+              isLoading={isLoading}
+            />
+          )
         },
+        onExpand: handleExpand,
       }}
     />
   )

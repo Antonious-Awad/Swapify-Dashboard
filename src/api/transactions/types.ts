@@ -9,5 +9,4 @@ export type GetTransactionDetailsReq = {
 export type GetTransactionDetailsRes = {
   offered_item: ExchangeItem
   requested_item: ExchangeItem
-  requestId: string
 }
