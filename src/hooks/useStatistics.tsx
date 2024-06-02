@@ -10,6 +10,7 @@ import {
   getStatsItem,
   getStatsUsers,
   getTransactionsByDay,
+  GetReportsCountsRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -26,10 +27,10 @@ export const useStatistics = () => {
   })
 
   const getReportCountQuery = useQuery<
-    AxiosResponse<unknown>,
+    AxiosResponse<GetReportsCountsRes>,
     AppErrorResponse
   >({
-    queryKey: ['get-report-cont'],
+    queryKey: ['get-report-count'],
     queryFn: getReportCount,
   })
 

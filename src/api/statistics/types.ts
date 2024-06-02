@@ -1,3 +1,5 @@
+import { reportRecord } from '../../common/types'
+
 export type GetTransactionsByDayRes = {
   TotalTransactions: number
   dailyTotals: {
@@ -5,4 +7,17 @@ export type GetTransactionsByDayRes = {
     day: string
     total: number
   }[]
+}
+
+export type GetReportsCountsRes = {
+  total: {
+    posts: number
+    customers: number
+    transactions: number
+  }
+  daily: {
+    posts: reportRecord[]
+    customers: reportRecord[]
+    transactions: reportRecord[]
+  }
 }

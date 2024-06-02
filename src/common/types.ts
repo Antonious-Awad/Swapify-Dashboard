@@ -96,3 +96,9 @@ export type Pagination = {
   page?: number
   limit?: number
 }
+
+export type reportRecord = {
+  _id: string
+  day: string
+  count: number
+}
