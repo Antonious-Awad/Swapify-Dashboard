@@ -9,6 +9,7 @@ import {
   Tooltip,
   XAxis,
 } from 'recharts'
+import { colors } from '../../styles/colors'
 
 export const TransactionsByDayCard = ({
   query,
@@ -28,7 +29,7 @@ export const TransactionsByDayCard = ({
               <Typography.Text className="font-semibold text-[18px]">
                 Total Transactions
               </Typography.Text>
-              <Typography.Text className="text-brand-300 font-semibold text-[32px]">
+              <Typography.Text className="text-brand-200 font-semibold text-[32px]">
                 ${totalTransactions}
               </Typography.Text>
             </Space>
@@ -37,7 +38,14 @@ export const TransactionsByDayCard = ({
         <Col span={12}>
           <ResponsiveContainer height={150}>
             <LineChart data={query.data?.data.dailyTotals}>
-              <Line type="monotone" dataKey={'total'} name="Transcations" />
+              <Line
+                type="monotone"
+                dataKey={'total'}
+                name="Transcations"
+                stroke={colors.brand[200]}
+                strokeWidth={'3px'}
+                dot={false}
+              />
               <XAxis dataKey={'day'} />
               <Legend verticalAlign="top" align="left" />
               <Tooltip />
