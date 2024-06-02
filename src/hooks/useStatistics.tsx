@@ -74,37 +74,51 @@ export const useStatistics = () => {
   useEffect(() => {
     if (getTransactionByDayQuery.isError)
       notification('error', {
-        message: getTransactionByDayQuery.error.response?.data.message,
+        message:
+          getTransactionByDayQuery.error.response?.data.message ||
+          'Error Fetching Transactions By Day',
       })
 
     if (getReportCountQuery.isError)
       notification('error', {
-        message: getReportCountQuery.error.response?.data.message,
+        message:
+          getReportCountQuery.error.response?.data.message ||
+          'Error Fetching Report Count',
       })
 
     if (getItemsByCategoryQuery.isError)
       notification('error', {
-        message: getItemsByCategoryQuery.error.response?.data.message,
+        message:
+          getItemsByCategoryQuery.error.response?.data.message ||
+          'Error Fetching Items By Category',
       })
 
     if (getAcceptedRequestsQuery.isError)
       notification('error', {
-        message: getAcceptedRequestsQuery.error.response?.data.message,
+        message:
+          getAcceptedRequestsQuery.error.response?.data.message ||
+          'Error Fetching Accepted Requests',
       })
 
     if (getStatsItemsQuery.isError)
       notification('error', {
-        message: getStatsItemsQuery.error.response?.data.message,
+        message:
+          getStatsItemsQuery.error.response?.data.message ||
+          'Error Fetching Items',
       })
 
     if (getStatsUsersQuery.isError)
       notification('error', {
-        message: getStatsUsersQuery.error.response?.data.message,
+        message:
+          getStatsUsersQuery.error.response?.data.message ||
+          'Error Fetching Customers',
       })
 
     if (getAcceptedItemsQuery.isError)
       notification('error', {
-        message: getAcceptedItemsQuery.error.response?.data.message,
+        message:
+          getAcceptedItemsQuery.error.response?.data.message ||
+          'Error Fetching Accepted Items',
       })
   }, [
     getTransactionByDayQuery,

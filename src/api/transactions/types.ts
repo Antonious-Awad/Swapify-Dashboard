@@ -1,6 +1,10 @@
 import { ExchangeItem, TableTransaction } from '../../common/types'
 
-export type GetAllAcceptedTransactionRes = TableTransaction[]
+export type GetAllAcceptedTransactionRes = {
+  data: TableTransaction[]
+  TotalAcceptedRequests: number
+  page: number
+}
 
 export type GetTransactionDetailsReq = {
   requestId: string

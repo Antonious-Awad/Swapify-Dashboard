@@ -83,7 +83,7 @@ export const Transactions = () => {
   return (
     <Table<TableTransaction>
       columns={TransactionTableColumns}
-      dataSource={transactions}
+      dataSource={transactions?.data}
       loading={isFetchingTransactions}
       rowKey={({ request_id: _id }) => _id}
       expandable={{
