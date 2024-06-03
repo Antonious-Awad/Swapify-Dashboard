@@ -9,7 +9,6 @@ import { appRoutes } from './routes/appRoutes.tsx'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './utils/queryClient.ts'
 import { NotificationProvider } from './contexts/notification/notificationContext.tsx'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -18,11 +17,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <NotificationProvider>
           <RouterProvider router={appRoutes} />
         </NotificationProvider>
-        <ReactQueryDevtools
-          initialIsOpen={false}
-          position="left"
-          buttonPosition="bottom-left"
-        />
       </ConfigProvider>
     </QueryClientProvider>
   </React.StrictMode>
