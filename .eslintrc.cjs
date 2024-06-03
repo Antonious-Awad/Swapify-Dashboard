@@ -6,7 +6,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'airbnb',
     'plugin:import/typescript',
-    'plugin:storybook/recommended',
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
