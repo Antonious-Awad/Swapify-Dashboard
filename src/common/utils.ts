@@ -1,4 +1,4 @@
-import { PostRequestItem } from './types'
+import { PostRequestItem, RangeOptions } from './types'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -12,3 +12,22 @@ export const statusColor: Record<PostRequestItem['status'], string> = {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export const rangeOptions: { value: RangeOptions; label: string }[] = [
+  {
+    value: '3_months',
+    label: '3 Months',
+  },
+  {
+    value: '6_months',
+    label: '6 Months',
+  },
+  {
+    value: '9_months',
+    label: '9 Months',
+  },
+  {
+    value: '12_months',
+    label: '12 Months',
+  },
+]

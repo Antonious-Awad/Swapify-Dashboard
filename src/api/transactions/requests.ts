@@ -4,13 +4,17 @@ import {
   GetTransactionDetailsReq,
   GetAllAcceptedTransactionRes,
   GetTransactionDetailsRes,
+  GetAllAcceptedTransactionReq,
 } from './types'
 
-export const getAllAcceptedTransaction = async (): Promise<
-  AxiosResponse<GetAllAcceptedTransactionRes>
-> => {
+export const getAllAcceptedTransaction = async (
+  reqBody: GetAllAcceptedTransactionReq
+): Promise<AxiosResponse<GetAllAcceptedTransactionRes>> => {
   const response = await axiosInstance.get(
-    '/Admin/listAcceptedExchangeRequests'
+    '/Admin/listAcceptedExchangeRequests',
+    {
+      params: reqBody,
+    }
   )
   return response
 }

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   DeleteCategoryRes,
+  GetCategoriesReq,
   GetCategoriesRes,
   deleteCategory,
   getCategories,
@@ -13,6 +14,7 @@ import { categoriesListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { CreateCategory } from './CreateCategory'
+import { InputSearch } from '../../components/Input'
 
 export const CategoriesList = () => {
   const { activateModal } = useModal()
@@ -20,17 +22,22 @@ export const CategoriesList = () => {
   const { notification } = useNotificationContext()
 
   const currentCategoryId = useRef('')
-  const [isCreateOpen, setIsCreateOpen] = useState(false)
   const queryClient = useQueryClient()
 
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+
+  const [query, setQuery] = useState<GetCategoriesReq>({
+    limit: 10,
+    page: 1,
+  })
   const {
     isLoading: isFetchingCategories,
     isError: isCategoriesError,
     error: categoriesError,
     data: categories,
   } = useQuery<GetCategoriesRes, AppErrorResponse>({
-    queryKey: ['get-categories'],
-    queryFn: getCategories,
+    queryKey: ['get-categories', query],
+    queryFn: () => getCategories(query),
   })
 
   const { isPending: isDeleting, mutate: deletCategoryMutate } = useMutation<
@@ -46,7 +53,7 @@ export const CategoriesList = () => {
         duration: 1,
         onClose: () => {
           queryClient.invalidateQueries({
-            queryKey: ['get-categories'],
+            queryKey: ['get-categories', query],
           })
         },
       })
@@ -69,32 +76,40 @@ export const CategoriesList = () => {
 
   return (
     <>
-      <Space size={'middle'} direction="vertical" className="w-full mt-3">
-        <Flex justify="end">
-          <Button
-            icon={<PlusCircleOutlined />}
-            ghost
-            onClick={() => setIsCreateOpen(true)}
-          >
-            Create
-          </Button>
-        </Flex>
-        <Table<Category>
-          dataSource={categories?.data.data}
-          rowKey={'id'}
-          columns={categoriesListColumns(
-            deletCategoryMutate,
-            isDeleting,
-            currentCategoryId.current
-          )}
-          loading={isFetchingCategories}
-          onRow={({ id }) => ({
-            onClick: () => {
-              currentCategoryId.current = id
-            },
-          })}
+      <Flex justify="space-between" className="my-5">
+        <InputSearch
+          placeholder="Search by item..."
+          onSearch={(value) =>
+            setQuery((prev) => ({
+              ...prev,
+              search: value || undefined,
+            }))
+          }
         />
-      </Space>
+        <Button
+          icon={<PlusCircleOutlined />}
+          ghost
+          className="h-[3rem]"
+          onClick={() => setIsCreateOpen(true)}
+        >
+          Add Category
+        </Button>
+      </Flex>
+      <Table<Category>
+        dataSource={categories?.data.data}
+        rowKey={'id'}
+        columns={categoriesListColumns(
+          deletCategoryMutate,
+          isDeleting,
+          currentCategoryId.current
+        )}
+        loading={isFetchingCategories}
+        onRow={({ id }) => ({
+          onClick: () => {
+            currentCategoryId.current = id
+          },
+        })}
+      />
       <Modal
         open={isCreateOpen}
         onCancel={() => setIsCreateOpen(false)}

@@ -1,9 +1,14 @@
 import axiosInstance from '../../utils/axios'
-import { DeleteCategoryRes, GetCategoriesRes } from './types'
+import { DeleteCategoryRes, GetCategoriesReq, GetCategoriesRes } from './types'
 import { DefaultApiResponse } from '../../common/types'
 
-export const getCategories = async (): Promise<GetCategoriesRes> => {
-  const request = await axiosInstance.get('/Admin/listCategoriesWithItemsCount')
+export const getCategories = async (
+  reqBody: GetCategoriesReq
+): Promise<GetCategoriesRes> => {
+  const request = await axiosInstance.get(
+    '/Admin/listCategoriesWithItemsCount',
+    { params: reqBody }
+  )
   return request
 }
 

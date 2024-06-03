@@ -14,11 +14,12 @@ import {
   PostRequestItem,
 } from '../../common/types'
 import { Flex, Table } from 'antd'
-import { itemsListColumns, rangeOptions } from './config'
+import { itemsListColumns } from './config'
 import { useEffect, useRef, useState } from 'react'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { InputSearch } from '../../components/Input/InputSearch'
 import { SelectDropdown } from '../../components/SelectDropdown'
+import { rangeOptions } from '../../common/utils'
 
 export const PostsRequests = () => {
   const { activateModal } = useModal()

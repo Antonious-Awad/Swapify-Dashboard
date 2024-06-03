@@ -1,4 +1,11 @@
-import { ExchangeItem, TableTransaction } from '../../common/types'
+import {
+  ExchangeItem,
+  Filters,
+  Pagination,
+  TableTransaction,
+} from '../../common/types'
+
+export type GetAllAcceptedTransactionReq = Pagination & Filters
 
 export type GetAllAcceptedTransactionRes = {
   data: TableTransaction[]
