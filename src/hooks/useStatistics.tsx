@@ -10,7 +10,9 @@ import {
   getStatsItem,
   getStatsUsers,
   getTransactionsByDay,
-  GetReportsCountsRes,
+  type GetReportsCountsRes,
+  type GetItemCountByCategoryRes,
+  getTodayTransactions,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -35,7 +37,7 @@ export const useStatistics = () => {
   })
 
   const getItemsByCategoryQuery = useQuery<
-    AxiosResponse<unknown>,
+    AxiosResponse<GetItemCountByCategoryRes>,
     AppErrorResponse
   >({
     queryKey: ['get-items-by-category'],
@@ -70,6 +72,14 @@ export const useStatistics = () => {
   >({
     queryKey: ['get-accepted-items'],
     queryFn: getAcceptedItems,
+  })
+
+  const getTodayTransactionsQuery = useQuery<
+    AxiosResponse<unknown>,
+    AppErrorResponse
+  >({
+    queryKey: ['get-today-transactions'],
+    queryFn: getTodayTransactions,
   })
 
   useEffect(() => {
@@ -121,6 +131,13 @@ export const useStatistics = () => {
           getAcceptedItemsQuery.error.response?.data.message ||
           'Error Fetching Accepted Items',
       })
+
+    if (getTodayTransactionsQuery.isError)
+      notification('error', {
+        message:
+          getTodayTransactionsQuery.error.response?.data.message ||
+          "Error Fetching Today's transactions",
+      })
   }, [
     getTransactionByDayQuery,
     getReportCountQuery,
@@ -129,6 +146,7 @@ export const useStatistics = () => {
     getStatsItemsQuery,
     getStatsUsersQuery,
     getAcceptedItemsQuery,
+    getTodayTransactionsQuery,
   ])
   return {
     getTransactionByDayQuery,
@@ -138,5 +156,6 @@ export const useStatistics = () => {
     getStatsItemsQuery,
     getStatsUsersQuery,
     getAcceptedItemsQuery,
+    getTodayTransactionsQuery,
   }
 }

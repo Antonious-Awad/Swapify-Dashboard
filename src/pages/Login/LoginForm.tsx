@@ -60,7 +60,11 @@ export const LoginForm = () => {
             messageVariables={{ label: 'Password' }}
             rules={[{ required: true }]}
           >
-            <InputPassword name="password" placeholder="Password" />
+            <InputPassword
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
           </Form.Item>
 
           <Button

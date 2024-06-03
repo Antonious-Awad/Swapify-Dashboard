@@ -13,6 +13,10 @@ export default {
       fontFamily: {
         sans: ['Poppins', 'ui-sans-serif'],
       },
+      gap: {
+        '3xs': '0.625rem',
+        '9xs': '0.25rem',
+      },
     },
   },
   corePlugins: {

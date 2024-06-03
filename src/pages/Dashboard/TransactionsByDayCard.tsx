@@ -30,7 +30,7 @@ export const TransactionsByDayCard = ({
                 Total Transactions
               </Typography.Text>
               <Typography.Text className="text-brand-200 font-semibold text-[32px]">
-                ${totalTransactions}
+                {totalTransactions}
               </Typography.Text>
             </Space>
           </Flex>

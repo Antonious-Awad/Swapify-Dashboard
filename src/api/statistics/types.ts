@@ -21,3 +21,8 @@ export type GetReportsCountsRes = {
     transactions: reportRecord[]
   }
 }
+
+export type GetItemCountByCategoryRes = {
+  category: string
+  count: number
+}[]

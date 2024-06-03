@@ -1,6 +1,10 @@
 import type { AxiosResponse } from 'axios'
 import axiosInstance from '../../utils/axios'
-import type { GetReportsCountsRes, GetTransactionsByDayRes } from './types'
+import type {
+  GetItemCountByCategoryRes,
+  GetReportsCountsRes,
+  GetTransactionsByDayRes,
+} from './types'
 
 export const getTransactionsByDay = async (): Promise<
   AxiosResponse<GetTransactionsByDayRes>
@@ -17,7 +21,7 @@ export const getReportCount = async (): Promise<
 }
 
 export const getItemCountByCategory = async (): Promise<
-  AxiosResponse<unknown>
+  AxiosResponse<GetItemCountByCategoryRes>
 > => {
   const response = axiosInstance.get('/Stat/itemsCountByCategory')
   return response
@@ -42,5 +46,12 @@ export const getStatsUsers = async (): Promise<AxiosResponse<unknown>> => {
 
 export const getAcceptedItems = async (): Promise<AxiosResponse<unknown>> => {
   const response = axiosInstance.get('/Stat/getacceptedItems')
+  return response
+}
+
+export const getTodayTransactions = async (): Promise<
+  AxiosResponse<unknown>
+> => {
+  const response = axiosInstance.get('/Stat//getTodayTransactionsData')
   return response
 }
