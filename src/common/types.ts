@@ -102,3 +102,6 @@ export type reportRecord = {
   day: string
   count: number
 }
+
+export type AcceptedItem = Omit<PostRequestItem, 'created_at'> &
+  { createdDate: string }[]

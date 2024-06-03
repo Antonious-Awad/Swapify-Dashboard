@@ -15,6 +15,7 @@ import {
   type GetAcceptedTransactionsStatRes,
   type GetStatsItemRes,
   type GetStatsUsersRes,
+  type GetAcceptedItemsRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -71,7 +72,7 @@ export const useStatistics = () => {
   })
 
   const getAcceptedItemsQuery = useQuery<
-    AxiosResponse<unknown>,
+    AxiosResponse<GetAcceptedItemsRes>,
     AppErrorResponse
   >({
     queryKey: ['get-accepted-items'],

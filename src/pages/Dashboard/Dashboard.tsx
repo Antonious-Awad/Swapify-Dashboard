@@ -6,6 +6,7 @@ import { CategoryItemCard } from './CategoryItemsCard'
 import { LastTransactionsCard } from './LastTransactionsCard'
 import { RecentPostsCard } from './RecentPostsRequestsCard'
 import { RecentUsersCard } from './RecentUsersCard'
+import { AcceptedItemsCard } from './AcceptedItemsCard'
 
 export const Dashboard = () => {
   const {
@@ -15,6 +16,7 @@ export const Dashboard = () => {
     getAcceptedRequestsQuery,
     getStatsItemsQuery,
     getStatsUsersQuery,
+    getAcceptedItemsQuery,
   } = useStatistics()
 
   return (
@@ -40,6 +42,9 @@ export const Dashboard = () => {
         <Col span={8}>
           <RecentUsersCard query={getStatsUsersQuery} />
         </Col>
+      </Row>
+      <Row className="my-2.5">
+        <AcceptedItemsCard query={getAcceptedItemsQuery} />
       </Row>
     </>
   )

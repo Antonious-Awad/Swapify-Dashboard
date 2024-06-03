@@ -41,7 +41,7 @@ export const TransactionsByDayCard = ({
               <Line
                 type="monotone"
                 dataKey={'total'}
-                name="Transcations"
+                name="Transactions"
                 stroke={colors.brand[200]}
                 strokeWidth={'3px'}
                 dot={false}

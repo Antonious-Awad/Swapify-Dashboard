@@ -1,6 +1,7 @@
 import { Col, Row, Space, TableProps, TabsProps, Typography } from 'antd'
-import { GetReportsCountsRes } from '../../api/statistics'
+import type { GetReportsCountsRes } from '../../api/statistics'
 import {
+  type AcceptedItem,
   Customer,
   PostRequestItem,
   TableTransaction,
@@ -135,5 +136,28 @@ export const recentUsersColumns: TableProps<Customer>['columns'] = [
   },
   {
     dataIndex: '_id',
+  },
+]
+
+export const acceptedItemsColumns: TableProps<AcceptedItem>['columns'] = [
+  {
+    dataIndex: '_id',
+    key: 'id',
+    title: 'ID',
+  },
+  {
+    dataIndex: 'user',
+    key: 'user',
+    title: 'CUSTOMER',
+  },
+  {
+    dataIndex: 'createdDate',
+    key: 'created',
+    title: 'DATE',
+  },
+  {
+    dataIndex: 'title',
+    key: 'item_name',
+    title: 'ITEM',
   },
 ]

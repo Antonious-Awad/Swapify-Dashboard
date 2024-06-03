@@ -1,4 +1,8 @@
-import { TableTransaction, reportRecord } from '../../common/types'
+import {
+  AcceptedItem,
+  TableTransaction,
+  reportRecord,
+} from '../../common/types'
 import { GetCustomersRes } from '../customer'
 import { GetRequestsRes } from '../postsRequests'
 
@@ -35,4 +39,9 @@ export type GetStatsItemRes = Omit<GetRequestsRes, 'page'>
 
 export type GetStatsUsersRes = Pick<GetCustomersRes, 'data'> & {
   TotalUsers: GetCustomersRes['totalUsers']
+}
+
+export type GetAcceptedItemsRes = {
+  TotalItems: number
+  data: AcceptedItem[]
 }

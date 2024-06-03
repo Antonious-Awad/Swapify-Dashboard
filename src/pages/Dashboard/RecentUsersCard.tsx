@@ -24,6 +24,7 @@ export const RecentUsersCard = ({
         columns={recentUsersColumns}
         showHeader={false}
         pagination={false}
+        scroll={{ y: '19.375rem' }}
       />
     </Card>
   )
