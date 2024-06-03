@@ -1,6 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import axiosInstance from '../../utils/axios'
 import type {
+  GetAcceptedTransactionsStatRes,
   GetItemCountByCategoryRes,
   GetReportsCountsRes,
   GetTransactionsByDayRes,
@@ -27,8 +28,8 @@ export const getItemCountByCategory = async (): Promise<
   return response
 }
 
-export const getAcceptedRequests = async (): Promise<
-  AxiosResponse<unknown>
+export const getAcceptedTransactionsStat = async (): Promise<
+  AxiosResponse<GetAcceptedTransactionsStatRes>
 > => {
   const response = axiosInstance.get('/Stat/listAcceptedExchangeRequests')
   return response

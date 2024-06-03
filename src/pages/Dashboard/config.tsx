@@ -1,6 +1,6 @@
-import { Space, TabsProps, Typography } from 'antd'
+import { Space, TableProps, TabsProps, Typography } from 'antd'
 import { GetReportsCountsRes } from '../../api/statistics'
-import { reportRecord } from '../../common/types'
+import { TableTransaction, reportRecord } from '../../common/types'
 import {
   Line,
   LineChart,
@@ -10,6 +10,7 @@ import {
   YAxis,
 } from 'recharts'
 import { colors } from '../../styles/colors'
+import { formatToDDMMMYYYY } from '../../utils/date'
 
 const reportTabLabel = (number: number, title: string) => (
   <Space size={1} direction="vertical">
@@ -56,3 +57,29 @@ export const reportsTabs = (data: GetReportsCountsRes): TabsProps['items'] => [
     children: reportTabRender(data.daily.transactions),
   },
 ]
+
+export const statTransactionTableColumns: TableProps<TableTransaction>['columns'] =
+  [
+    {
+      key: 'request-id',
+      title: 'TRANSACTION ID',
+      dataIndex: 'request_id',
+    },
+    {
+      dataIndex: 'creation_date',
+      key: 'creation-date',
+      title: 'CREATED',
+      render: (date: TableTransaction['creation_date']) =>
+        formatToDDMMMYYYY(date),
+    },
+    {
+      key: 'from',
+      title: 'FROM',
+      dataIndex: 'From',
+    },
+    {
+      key: 'to',
+      title: 'TO',
+      dataIndex: 'To',
+    },
+  ]

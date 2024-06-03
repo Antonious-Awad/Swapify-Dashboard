@@ -3,12 +3,14 @@ import { useStatistics } from '../../hooks/useStatistics'
 import { TransactionsByDayCard } from './TransactionsByDayCard'
 import { ReportsCard } from './ReportsCard'
 import { CategoryItemCard } from './CategoryItemsCard'
+import { LastTransactionsCard } from './LastTransactionsCard'
 
 export const Dashboard = () => {
   const {
     getTransactionByDayQuery,
     getReportCountQuery,
     getItemsByCategoryQuery,
+    getAcceptedRequestsQuery,
   } = useStatistics()
 
   return (
@@ -16,7 +18,7 @@ export const Dashboard = () => {
       <Row className="w-full mt-5 mb-2.5">
         <TransactionsByDayCard query={getTransactionByDayQuery} />
       </Row>
-      <Row className="my-2.5 h-[26rem]" gutter={24}>
+      <Row className="my-2.5 h-[27rem]" gutter={24}>
         <Col span={16}>
           <ReportsCard query={getReportCountQuery} />
         </Col>
@@ -24,7 +26,9 @@ export const Dashboard = () => {
           <CategoryItemCard query={getItemsByCategoryQuery} />
         </Col>
       </Row>
-      <Row className="my-2.5"></Row>
+      <Row className="my-2.5">
+        <LastTransactionsCard query={getAcceptedRequestsQuery} />
+      </Row>
     </>
   )
 }

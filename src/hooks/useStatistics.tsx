@@ -4,7 +4,7 @@ import { AppErrorResponse } from '../common/types'
 import {
   type GetTransactionsByDayRes,
   getAcceptedItems,
-  getAcceptedRequests,
+  getAcceptedTransactionsStat,
   getItemCountByCategory,
   getReportCount,
   getStatsItem,
@@ -13,6 +13,7 @@ import {
   type GetReportsCountsRes,
   type GetItemCountByCategoryRes,
   getTodayTransactions,
+  type GetAcceptedTransactionsStatRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -45,11 +46,11 @@ export const useStatistics = () => {
   })
 
   const getAcceptedRequestsQuery = useQuery<
-    AxiosResponse<unknown>,
+    AxiosResponse<GetAcceptedTransactionsStatRes>,
     AppErrorResponse
   >({
     queryKey: ['get-accepted-requests'],
-    queryFn: getAcceptedRequests,
+    queryFn: getAcceptedTransactionsStat,
   })
 
   const getStatsItemsQuery = useQuery<AxiosResponse<unknown>, AppErrorResponse>(

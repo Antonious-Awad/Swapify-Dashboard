@@ -1,4 +1,4 @@
-import { reportRecord } from '../../common/types'
+import { TableTransaction, reportRecord } from '../../common/types'
 
 export type GetTransactionsByDayRes = {
   TotalTransactions: number
@@ -26,3 +26,5 @@ export type GetItemCountByCategoryRes = {
   category: string
   count: number
 }[]
+
+export type GetAcceptedTransactionsStatRes = TableTransaction[]

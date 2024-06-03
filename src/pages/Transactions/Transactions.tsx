@@ -8,7 +8,7 @@ import { useModal } from '../../hooks'
 import { AxiosResponse } from 'axios'
 import { Empty, Table } from 'antd'
 import { AppErrorResponse, TableTransaction } from '../../common/types'
-import { TransactionTableColumns } from './config'
+import { transactionTableColumns } from './config'
 import {
   GetAllAcceptedTransactionRes,
   GetTransactionDetailsReq,
@@ -82,7 +82,7 @@ export const Transactions = () => {
 
   return (
     <Table<TableTransaction>
-      columns={TransactionTableColumns}
+      columns={transactionTableColumns}
       dataSource={transactions?.data}
       loading={isFetchingTransactions}
       rowKey={({ request_id: _id }) => _id}

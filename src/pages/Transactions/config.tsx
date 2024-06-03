@@ -2,7 +2,7 @@ import { Table, type TableProps } from 'antd'
 import type { TableTransaction } from '../../common/types'
 import { calculateTimeFromToday } from '../../utils/date'
 
-export const TransactionTableColumns: TableProps<TableTransaction>['columns'] =
+export const transactionTableColumns: TableProps<TableTransaction>['columns'] =
   [
     {
       key: 'request-id',
