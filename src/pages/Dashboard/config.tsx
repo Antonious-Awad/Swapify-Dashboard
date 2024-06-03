@@ -1,6 +1,10 @@
 import { Space, TableProps, TabsProps, Typography } from 'antd'
 import { GetReportsCountsRes } from '../../api/statistics'
-import { TableTransaction, reportRecord } from '../../common/types'
+import {
+  PostRequestItem,
+  TableTransaction,
+  reportRecord,
+} from '../../common/types'
 import {
   Line,
   LineChart,
@@ -11,6 +15,7 @@ import {
 } from 'recharts'
 import { colors } from '../../styles/colors'
 import { formatToDDMMMYYYY } from '../../utils/date'
+import { statusColor } from '../../common/utils'
 
 const reportTabLabel = (number: number, title: string) => (
   <Space size={1} direction="vertical">
@@ -83,3 +88,30 @@ export const statTransactionTableColumns: TableProps<TableTransaction>['columns'
       dataIndex: 'To',
     },
   ]
+
+export const itemsStatisticsColumns: TableProps<PostRequestItem>['columns'] = [
+  {
+    dataIndex: '_id',
+    key: 'id',
+    title: 'ID',
+  },
+  {
+    dataIndex: 'user',
+    key: 'user',
+    title: 'CUSTOMER',
+  },
+  {
+    dataIndex: 'status',
+    key: 'status',
+    title: 'STATUS',
+    render: (status: PostRequestItem['status']) => {
+      const className = `${statusColor[status]} font-semibold`
+      return <Typography.Text className={className}>{status}</Typography.Text>
+    },
+  },
+  {
+    dataIndex: 'title',
+    key: 'item_name',
+    title: 'ITEM',
+  },
+]

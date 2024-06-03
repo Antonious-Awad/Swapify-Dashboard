@@ -28,7 +28,6 @@ export type GetCustomerInfoRes = {
     phone: number
     location: Location
     favorites: string[]
-    //TODO: align with BE how to receive images
     image: string
     NumberOfPosts: number
     NumberOfRequest: number

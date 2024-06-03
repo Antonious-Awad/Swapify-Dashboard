@@ -1,4 +1,5 @@
 import { TableTransaction, reportRecord } from '../../common/types'
+import { GetRequestsRes } from '../postsRequests'
 
 export type GetTransactionsByDayRes = {
   TotalTransactions: number
@@ -28,3 +29,5 @@ export type GetItemCountByCategoryRes = {
 }[]
 
 export type GetAcceptedTransactionsStatRes = TableTransaction[]
+
+export type GetStatsItemRes = Omit<GetRequestsRes, 'page'>

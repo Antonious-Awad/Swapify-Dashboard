@@ -2,13 +2,7 @@ import { Button, Popconfirm, Space, TableProps, Typography } from 'antd'
 import { PostRequestItem } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-
-const statusColor: Record<PostRequestItem['status'], string> = {
-  pending: 'text-warning-300',
-  expired: 'text-danger-300',
-  rejected: 'text-danger-400',
-  accepted: 'text-success-300',
-}
+import { statusColor } from '../../common/utils'
 
 export const itemsListColumns = (
   handleStatus: (id: string, status: PostRequestItem['status']) => void,

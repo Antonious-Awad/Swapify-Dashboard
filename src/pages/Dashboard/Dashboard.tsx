@@ -4,6 +4,7 @@ import { TransactionsByDayCard } from './TransactionsByDayCard'
 import { ReportsCard } from './ReportsCard'
 import { CategoryItemCard } from './CategoryItemsCard'
 import { LastTransactionsCard } from './LastTransactionsCard'
+import { RecentPostsCard } from './RecentPostsRequestsCard'
 
 export const Dashboard = () => {
   const {
@@ -11,6 +12,7 @@ export const Dashboard = () => {
     getReportCountQuery,
     getItemsByCategoryQuery,
     getAcceptedRequestsQuery,
+    getStatsItemsQuery,
   } = useStatistics()
 
   return (
@@ -28,6 +30,12 @@ export const Dashboard = () => {
       </Row>
       <Row className="my-2.5">
         <LastTransactionsCard query={getAcceptedRequestsQuery} />
+      </Row>
+      <Row className="my-2.5" gutter={24}>
+        <Col span={16}>
+          <RecentPostsCard query={getStatsItemsQuery} />
+        </Col>
+        <Col span={8}></Col>
       </Row>
     </>
   )

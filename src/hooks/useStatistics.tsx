@@ -12,8 +12,8 @@ import {
   getTransactionsByDay,
   type GetReportsCountsRes,
   type GetItemCountByCategoryRes,
-  getTodayTransactions,
   type GetAcceptedTransactionsStatRes,
+  GetStatsItemRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -53,12 +53,13 @@ export const useStatistics = () => {
     queryFn: getAcceptedTransactionsStat,
   })
 
-  const getStatsItemsQuery = useQuery<AxiosResponse<unknown>, AppErrorResponse>(
-    {
-      queryKey: ['get-statistics-items'],
-      queryFn: getStatsItem,
-    }
-  )
+  const getStatsItemsQuery = useQuery<
+    AxiosResponse<GetStatsItemRes>,
+    AppErrorResponse
+  >({
+    queryKey: ['get-statistics-items'],
+    queryFn: getStatsItem,
+  })
 
   const getStatsUsersQuery = useQuery<AxiosResponse<unknown>, AppErrorResponse>(
     {
@@ -75,13 +76,13 @@ export const useStatistics = () => {
     queryFn: getAcceptedItems,
   })
 
-  const getTodayTransactionsQuery = useQuery<
-    AxiosResponse<unknown>,
-    AppErrorResponse
-  >({
-    queryKey: ['get-today-transactions'],
-    queryFn: getTodayTransactions,
-  })
+  // const getTodayTransactionsQuery = useQuery<
+  //   AxiosResponse<unknown>,
+  //   AppErrorResponse
+  // >({
+  //   queryKey: ['get-today-transactions'],
+  //   queryFn: getTodayTransactions,
+  // })
 
   useEffect(() => {
     if (getTransactionByDayQuery.isError)
@@ -133,12 +134,12 @@ export const useStatistics = () => {
           'Error Fetching Accepted Items',
       })
 
-    if (getTodayTransactionsQuery.isError)
-      notification('error', {
-        message:
-          getTodayTransactionsQuery.error.response?.data.message ||
-          "Error Fetching Today's transactions",
-      })
+    // if (getTodayTransactionsQuery.isError)
+    //   notification('error', {
+    //     message:
+    //       getTodayTransactionsQuery.error.response?.data.message ||
+    //       "Error Fetching Today's transactions",
+    //   })
   }, [
     getTransactionByDayQuery,
     getReportCountQuery,
@@ -147,7 +148,7 @@ export const useStatistics = () => {
     getStatsItemsQuery,
     getStatsUsersQuery,
     getAcceptedItemsQuery,
-    getTodayTransactionsQuery,
+    // getTodayTransactionsQuery,
   ])
   return {
     getTransactionByDayQuery,
@@ -157,6 +158,6 @@ export const useStatistics = () => {
     getStatsItemsQuery,
     getStatsUsersQuery,
     getAcceptedItemsQuery,
-    getTodayTransactionsQuery,
+    // getTodayTransactionsQuery,
   }
 }
