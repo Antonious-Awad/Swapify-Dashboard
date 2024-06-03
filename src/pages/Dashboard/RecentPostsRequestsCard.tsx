@@ -20,6 +20,7 @@ export const RecentPostsCard = ({
         dataSource={query.data?.data.data}
         columns={itemsStatisticsColumns}
         rowKey={({ _id }) => _id}
+        pagination={false}
       />
     </Card>
   )

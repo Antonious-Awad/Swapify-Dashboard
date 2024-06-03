@@ -1,4 +1,5 @@
 import { TableTransaction, reportRecord } from '../../common/types'
+import { GetCustomersRes } from '../customer'
 import { GetRequestsRes } from '../postsRequests'
 
 export type GetTransactionsByDayRes = {
@@ -31,3 +32,7 @@ export type GetItemCountByCategoryRes = {
 export type GetAcceptedTransactionsStatRes = TableTransaction[]
 
 export type GetStatsItemRes = Omit<GetRequestsRes, 'page'>
+
+export type GetStatsUsersRes = Pick<GetCustomersRes, 'data'> & {
+  TotalUsers: GetCustomersRes['totalUsers']
+}

@@ -19,6 +19,7 @@ export const LastTransactionsCard = ({
         columns={statTransactionTableColumns}
         dataSource={query.data?.data}
         rowKey={({ request_id: _id }) => _id}
+        pagination={false}
       />
     </Card>
   )

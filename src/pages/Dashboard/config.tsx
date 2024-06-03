@@ -1,6 +1,7 @@
-import { Space, TableProps, TabsProps, Typography } from 'antd'
+import { Col, Row, Space, TableProps, TabsProps, Typography } from 'antd'
 import { GetReportsCountsRes } from '../../api/statistics'
 import {
+  Customer,
   PostRequestItem,
   TableTransaction,
   reportRecord,
@@ -113,5 +114,26 @@ export const itemsStatisticsColumns: TableProps<PostRequestItem>['columns'] = [
     dataIndex: 'title',
     key: 'item_name',
     title: 'ITEM',
+  },
+]
+
+export const recentUsersColumns: TableProps<Customer>['columns'] = [
+  {
+    dataIndex: 'username',
+    render: (username: Customer['username'], { location }) => (
+      <>
+        <Col>
+          <Row className="font-semibold text-brand-400 text-[15px]">
+            {username}
+          </Row>
+          <Row className="text-neutral-300 text-[12px] font-medium">
+            {location.city} , {location.governorate}
+          </Row>
+        </Col>
+      </>
+    ),
+  },
+  {
+    dataIndex: '_id',
   },
 ]

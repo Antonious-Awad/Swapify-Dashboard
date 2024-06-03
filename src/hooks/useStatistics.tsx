@@ -13,7 +13,8 @@ import {
   type GetReportsCountsRes,
   type GetItemCountByCategoryRes,
   type GetAcceptedTransactionsStatRes,
-  GetStatsItemRes,
+  type GetStatsItemRes,
+  type GetStatsUsersRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
 import { useEffect } from 'react'
@@ -61,12 +62,13 @@ export const useStatistics = () => {
     queryFn: getStatsItem,
   })
 
-  const getStatsUsersQuery = useQuery<AxiosResponse<unknown>, AppErrorResponse>(
-    {
-      queryKey: ['get-statistics-users'],
-      queryFn: getStatsUsers,
-    }
-  )
+  const getStatsUsersQuery = useQuery<
+    AxiosResponse<GetStatsUsersRes>,
+    AppErrorResponse
+  >({
+    queryKey: ['get-statistics-users'],
+    queryFn: getStatsUsers,
+  })
 
   const getAcceptedItemsQuery = useQuery<
     AxiosResponse<unknown>,

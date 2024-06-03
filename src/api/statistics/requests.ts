@@ -5,6 +5,7 @@ import type {
   GetItemCountByCategoryRes,
   GetReportsCountsRes,
   GetStatsItemRes,
+  GetStatsUsersRes,
   GetTransactionsByDayRes,
 } from './types'
 
@@ -43,7 +44,9 @@ export const getStatsItem = async (): Promise<
   return response
 }
 
-export const getStatsUsers = async (): Promise<AxiosResponse<unknown>> => {
+export const getStatsUsers = async (): Promise<
+  AxiosResponse<GetStatsUsersRes>
+> => {
   const response = axiosInstance.get('/Stat/getUsers')
   return response
 }
