@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
@@ -13,10 +14,19 @@ import { CategoriesList } from '../pages/Categories/CategoriesList'
 import { AdminProfile } from '../pages/AdminProfile'
 import { PostsRequests } from '../pages/PostsRequests'
 import { Dashboard } from '../pages/Dashboard'
+import { checkValidToken } from '../utils/token'
 
 export const appRoutes = createBrowserRouter(
   createRoutesFromElements(
     <Route path={APP_PATHS.landing} element={<App />}>
+      <Route
+        index
+        element={
+          <Navigate
+            to={checkValidToken() ? APP_PATHS.login : APP_PATHS.dashboard}
+          />
+        }
+      />
       <Route element={<LoginLayout />}>
         <Route path={APP_PATHS.login} element={<Login />} />
       </Route>
