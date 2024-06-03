@@ -92,9 +92,16 @@ export type PostRequestItem = {
   updated_at: string
 }
 
+export type RangeOptions = '3_months' | '6_months' | '9_months' | '12_months'
+
 export type Pagination = {
   page?: number
   limit?: number
+}
+
+export type Filters = {
+  search?: string
+  rangeOption?: RangeOptions | ''
 }
 
 export type reportRecord = {

@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios'
 import axiosInstance from '../../utils/axios'
-import { GetRequestsRes, UpdateStatusReq } from './types'
-import { DefaultApiResponse, Pagination } from '../../common/types'
+import type { GetRequestsReq, GetRequestsRes, UpdateStatusReq } from './types'
+import type { DefaultApiResponse } from '../../common/types'
 
 export const getPostsRequests = async (
-  reqBody: Pagination
+  reqBody: GetRequestsReq
 ): Promise<AxiosResponse<GetRequestsRes>> => {
-  const response = axiosInstance.get('/getItems', {
+  const response = axiosInstance.get('/Admin/getItems', {
     params: reqBody,
   })
   return response

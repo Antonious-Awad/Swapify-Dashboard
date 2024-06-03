@@ -1,4 +1,6 @@
-import { PostRequestItem } from '../../common/types'
+import type { Pagination, PostRequestItem, Filters } from '../../common/types'
+
+export type GetRequestsReq = Pagination & Filters
 
 export type GetRequestsRes = {
   TotalItems: number

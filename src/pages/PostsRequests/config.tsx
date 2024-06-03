@@ -1,8 +1,9 @@
 import { Button, Popconfirm, Space, TableProps, Typography } from 'antd'
-import { PostRequestItem } from '../../common/types'
+import { PostRequestItem, RangeOptions } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { statusColor } from '../../common/utils'
+import { DefaultOptionType } from 'antd/es/select'
 
 export const itemsListColumns = (
   handleStatus: (id: string, status: PostRequestItem['status']) => void,
@@ -78,5 +79,24 @@ export const itemsListColumns = (
         </Space>
       )
     },
+  },
+]
+
+export const rangeOptions: { value: RangeOptions; label: string }[] = [
+  {
+    value: '3_months',
+    label: '3 Months',
+  },
+  {
+    value: '6_months',
+    label: '6 Months',
+  },
+  {
+    value: '9_months',
+    label: '9 Months',
+  },
+  {
+    value: '12_months',
+    label: '12 Months',
   },
 ]

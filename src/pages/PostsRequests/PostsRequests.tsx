@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useModal } from '../../hooks'
 import {
+  GetRequestsReq,
   GetRequestsRes,
   UpdateStatusReq,
   getPostsRequests,
@@ -10,20 +11,21 @@ import { AxiosResponse } from 'axios'
 import {
   AppErrorResponse,
   DefaultApiResponse,
-  Pagination,
   PostRequestItem,
 } from '../../common/types'
-import { Table } from 'antd'
-import { itemsListColumns } from './config'
+import { Flex, Table } from 'antd'
+import { itemsListColumns, rangeOptions } from './config'
 import { useEffect, useRef, useState } from 'react'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
+import { InputSearch } from '../../components/Input/InputSearch'
+import { SelectDropdown } from '../../components/SelectDropdown'
 
 export const PostsRequests = () => {
   const { activateModal } = useModal()
   const { notification } = useNotificationContext()
   const queryClient = useQueryClient()
 
-  const [query, setQuery] = useState<Required<Pagination>>({
+  const [query, setQuery] = useState<GetRequestsReq>({
     limit: 10,
     page: 1,
   })
@@ -35,7 +37,13 @@ export const PostsRequests = () => {
     isError,
     error,
   } = useQuery<AxiosResponse<GetRequestsRes>, AppErrorResponse>({
-    queryKey: ['get-posts-requests', query.limit, query.page],
+    queryKey: [
+      'get-posts-requests',
+      query.limit,
+      query.page,
+      query.search,
+      query.rangeOption,
+    ],
     queryFn: () => getPostsRequests(query),
   })
 
@@ -51,7 +59,13 @@ export const PostsRequests = () => {
         message: res.data.message || 'Status Successfully updated',
         onClose: () =>
           queryClient.invalidateQueries({
-            queryKey: ['get-posts-requests', query.limit, query.page],
+            queryKey: [
+              'get-posts-requests',
+              query.limit,
+              query.page,
+              query.search,
+              query.rangeOption,
+            ],
           }),
       }),
     onError: (err) => {
@@ -76,32 +90,62 @@ export const PostsRequests = () => {
 
   const items = itemsRes?.data.data
   return (
-    <Table<PostRequestItem>
-      loading={isFetchingItems}
-      dataSource={items}
-      columns={itemsListColumns(
-        handleUpdate,
-        isUpdatingStatus,
-        currentId.current
-      )}
-      rowKey={({ _id }) => _id}
-      onRow={({ _id }) => ({
-        onClick: () => {
-          currentId.current = _id
-        },
-      })}
-      pagination={{
-        total: itemsRes?.data.TotalItems,
-        current: query.page,
-        pageSize: query.limit,
-        showSizeChanger: true,
-        onChange: (page, pageSize) => {
-          setQuery({
-            page,
-            limit: pageSize,
-          })
-        },
-      }}
-    />
+    <>
+      <Flex justify="space-between" className="my-5">
+        <InputSearch
+          placeholder="Search by item..."
+          onSearch={(value) =>
+            setQuery((prev) => ({
+              ...prev,
+              search: value || undefined,
+            }))
+          }
+        />
+        <SelectDropdown
+          options={rangeOptions}
+          placeholder="Filter By Date Range"
+          onSelect={(value) =>
+            setQuery((prev) => ({
+              ...prev,
+              rangeOption: value,
+            }))
+          }
+          onClear={() =>
+            setQuery((prev) => ({
+              ...prev,
+              rangeOption: undefined,
+            }))
+          }
+        />
+      </Flex>
+      <Table<PostRequestItem>
+        loading={isFetchingItems}
+        dataSource={items}
+        columns={itemsListColumns(
+          handleUpdate,
+          isUpdatingStatus,
+          currentId.current
+        )}
+        rowKey={({ _id }) => _id}
+        onRow={({ _id }) => ({
+          onClick: () => {
+            currentId.current = _id
+          },
+        })}
+        pagination={{
+          total: itemsRes?.data.TotalItems,
+          current: query.page,
+          pageSize: query.limit,
+          showSizeChanger: true,
+          onChange: (page, pageSize) => {
+            setQuery((prev) => ({
+              ...prev,
+              page,
+              limit: pageSize,
+            }))
+          },
+        }}
+      />
+    </>
   )
 }
