@@ -1,11 +1,12 @@
 import {
   Customer,
   CustomerRequest,
+  Filters,
   Location,
   Pagination,
 } from '../../common/types'
 
-export type GetCustomerReq = Pagination
+export type GetCustomerReq = Pagination & Pick<Filters, 'search'>
 
 export type GetCustomersRes = {
   currentPage: number

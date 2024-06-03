@@ -14,6 +14,7 @@ import { customerListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
+import { InputSearch } from '../../components/Input'
 
 export const CustomerList = () => {
   const { activateModal } = useModal()
@@ -23,7 +24,7 @@ export const CustomerList = () => {
 
   const currentId = useRef('')
 
-  const [query, setQuery] = useState<Required<GetCustomerReq>>({
+  const [query, setQuery] = useState<GetCustomerReq>({
     limit: 10,
     page: 1,
   })
@@ -33,7 +34,7 @@ export const CustomerList = () => {
     isPending: isFetchingCustomers,
     error: customerListError,
   } = useQuery<AxiosResponse<GetCustomersRes>, AppErrorResponse>({
-    queryKey: ['get-customers', query.limit, query.page],
+    queryKey: ['get-customers', query.limit, query.page, query.search],
     queryFn: () => getCustomers(query),
   })
   const customerList = customerResponse?.data.data
@@ -53,7 +54,7 @@ export const CustomerList = () => {
         duration: 1,
         onClose: () => {
           queryClient.invalidateQueries({
-            queryKey: ['get-customers', query.limit, query.page],
+            queryKey: ['get-customers', query.limit, query.page, query.search],
           })
         },
       })
@@ -77,31 +78,43 @@ export const CustomerList = () => {
     })
 
   return (
-    <Table<Customer>
-      loading={isFetchingCustomers}
-      dataSource={customerList}
-      columns={customerListColumns({
-        onDelete: deleteCustomerMutate,
-        isDeleting,
-        currentId: currentId.current,
-        onEyeClick: handleEyeClick,
-      })}
-      rowKey={({ _id }) => _id}
-      onRow={({ _id }) => ({
-        onClick: () => {
-          currentId.current = _id
-        },
-      })}
-      pagination={{
-        total: customerResponse?.data.totalUsers,
-        showSizeChanger: true,
-        onChange: (page, pageSize) => {
-          setQuery({
-            page,
-            limit: pageSize,
-          })
-        },
-      }}
-    />
+    <>
+      <InputSearch
+        placeholder="Search by name..."
+        onSearch={(value) =>
+          setQuery((prev) => ({
+            ...prev,
+            search: value || undefined,
+          }))
+        }
+        className="my-5"
+      />
+      <Table<Customer>
+        loading={isFetchingCustomers}
+        dataSource={customerList}
+        columns={customerListColumns({
+          onDelete: deleteCustomerMutate,
+          isDeleting,
+          currentId: currentId.current,
+          onEyeClick: handleEyeClick,
+        })}
+        rowKey={({ _id }) => _id}
+        onRow={({ _id }) => ({
+          onClick: () => {
+            currentId.current = _id
+          },
+        })}
+        pagination={{
+          total: customerResponse?.data.totalUsers,
+          showSizeChanger: true,
+          onChange: (page, pageSize) => {
+            setQuery({
+              page,
+              limit: pageSize,
+            })
+          },
+        }}
+      />
+    </>
   )
 }
