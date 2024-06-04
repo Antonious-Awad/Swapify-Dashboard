@@ -22,7 +22,7 @@ export const customerListColumns = ({
     render: (username: Customer['username'], { email, image }) => (
       <Row align="middle">
         <Col span={4}>
-          <Avatar src={image} icon={<UserOutlined />} size={32} />
+          <Avatar src={image?.url} icon={<UserOutlined />} size={32} />
         </Col>
         <Col>
           <Row className="font-semibold text-brand-400">{username}</Row>

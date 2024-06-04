@@ -2,6 +2,7 @@ import {
   Customer,
   CustomerRequest,
   Filters,
+  ImageObject,
   Location,
   Pagination,
 } from '../../common/types'
@@ -29,7 +30,7 @@ export type GetCustomerInfoRes = {
     phone: number
     location: Location
     favorites: string[]
-    image: string
+    image: ImageObject
     NumberOfPosts: number
     NumberOfRequest: number
   }

@@ -14,7 +14,7 @@ export const CustomerCard = ({
           <Avatar
             size={100}
             icon={<UserOutlined />}
-            src={customerDetails?.image}
+            src={customerDetails?.image?.url}
           />
         </Col>
         <Col span={5} className="mb-[1rem]">

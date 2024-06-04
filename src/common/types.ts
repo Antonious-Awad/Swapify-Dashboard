@@ -1,5 +1,10 @@
 import { AxiosError, AxiosResponse } from 'axios'
 
+export type ImageObject = {
+  url: string
+  public_id: string
+}
+
 export type TableTransaction = {
   From: string
   To: string
@@ -10,7 +15,7 @@ export type TableTransaction = {
 }
 
 export type ExchangeItem = {
-  Descreption: string
+  Description: string
   price: number
   title: string
 }
@@ -32,7 +37,7 @@ export type Customer = {
   phone: string
   token: string
   __v: number
-  image: string
+  image: ImageObject
 }
 
 export type AppErrorResponse = AxiosError<{
@@ -72,19 +77,19 @@ export type AdminInfo = {
   phone: string
   password: string
   location: Location
-  image: string
+  image: ImageObject
 }
 
 export type PostRequestItem = {
   _id: string
   title: string
-  Descreption: string
+  Description: string
   price: number
   category: string
   user: string
   condition: boolean
   slug: string
-  image: string
+  image: ImageObject
   status: 'pending' | 'accepted' | 'rejected' | 'expired'
   updatedAt: string
   __v: number

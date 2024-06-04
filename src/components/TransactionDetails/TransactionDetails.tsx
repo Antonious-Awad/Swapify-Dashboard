@@ -5,11 +5,11 @@ export const TransactionDetails = ({
   transactionDetails,
   isLoading,
 }: TransactionDetailsProps) => {
-  const itemKeys: ItemKeys[] = ['Descreption', 'price', 'title']
+  const itemKeys: ItemKeys[] = ['Description', 'price', 'title']
   const itemTitles: Record<ItemKeys, string> = {
     price: 'Price',
     title: 'Name',
-    Descreption: 'Description',
+    Description: 'Description',
   }
   return (
     <Row gutter={24}>
@@ -20,7 +20,7 @@ export const TransactionDetails = ({
               <Col key={`offered-item-${key}`} span={8}>
                 <Space size="middle" direction="vertical">
                   <Typography.Text>{itemTitles[key]}</Typography.Text>
-                  <Typography.Text>
+                  <Typography.Text className="line-clamp-2">
                     {transactionDetails?.offered_item[key] || 'N/A'}
                   </Typography.Text>
                 </Space>

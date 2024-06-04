@@ -83,7 +83,7 @@ export const AdminProfile = () => {
     }
   })
 
-  type AdminInfoKeys = keyof GetAdminInfoRes['data']
+  type AdminInfoKeys = Exclude<keyof GetAdminInfoRes['data'], 'image'>
   const personalInfoKeys: AdminInfoKeys[] = ['username', 'phone', 'location']
   const signInMethodKeys: AdminInfoKeys[] = ['email', 'password']
 
@@ -93,7 +93,6 @@ export const AdminProfile = () => {
     phone: 'Contact Phone',
     location: 'Location',
     password: 'Password',
-    image: 'Image',
   }
 
   return (
@@ -103,14 +102,14 @@ export const AdminProfile = () => {
           <Avatar
             size={120}
             icon={<UserOutlined />}
-            src={adminInfo?.image}
+            src={adminInfo?.image?.url}
             className="relative"
           />
           <div className="absolute bottom-0 right-0">
             <Button
-              type="link"
+              type="primary"
               icon={<EditOutlined />}
-              className="bg-brand-100 rounded-full border text-neutral-300"
+              className="bg-brand-100 rounded-full border text-neutral-300 shadow-none"
               loading={isUploadingPhoto}
               onClick={() => uploaderRef.current?.click()}
             />
