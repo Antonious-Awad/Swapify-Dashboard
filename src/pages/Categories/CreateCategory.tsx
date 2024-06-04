@@ -1,3 +1,5 @@
+import { PlusOutlined } from '@ant-design/icons'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   Button,
   Flex,
@@ -10,8 +12,6 @@ import {
 import { CategoryForm } from './types'
 import { Input } from '../../components/Input'
 import { normalizeUploadFile } from './config'
-import { PlusOutlined } from '@ant-design/icons'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCategory } from '../../api/categories'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import {
@@ -67,21 +67,21 @@ export const CreateCategory = ({ onClose }: BaseModalProps) => {
 
   return (
     <Form form={form} onFinish={handleSubmit}>
-      <Flex align="start" vertical gap={'0.5rem'}>
+      <Flex align="start" vertical gap="0.5rem">
         <Typography.Text className="font-semibold">Image</Typography.Text>
         <Form.Item noStyle shouldUpdate>
           {({ getFieldValue }) => {
             const image = getFieldValue('image')
             return (
               <Form.Item
-                name={'image'}
+                name="image"
                 messageVariables={{ label: 'Image' }}
                 valuePropName="fileList"
                 normalize={normalizeUploadFile}
                 rules={[{ required: true }]}
               >
                 <Upload
-                  action={'none'}
+                  action="none"
                   listType="picture-card"
                   className="cursor-pointer"
                   multiple={false}
@@ -93,7 +93,10 @@ export const CreateCategory = ({ onClose }: BaseModalProps) => {
                   }}
                   customRequest={dummyRequest}
                 >
-                  <button className="w-full border-0 bg-transparent cursor-pointer">
+                  <button
+                    className="w-full border-0 bg-transparent cursor-pointer"
+                    type="button"
+                  >
                     <PlusOutlined />
                     <div className="mt-2">Upload</div>
                   </button>
@@ -104,14 +107,14 @@ export const CreateCategory = ({ onClose }: BaseModalProps) => {
         </Form.Item>
       </Flex>
       <Form.Item
-        name={'name'}
+        name="name"
         messageVariables={{ label: 'Name' }}
         rules={[{ required: true }]}
       >
         <Input name="name" title="Name" required />
       </Form.Item>
       <Flex justify="end">
-        <Space size={'middle'}>
+        <Space size="middle">
           <Button type="default" onClick={onClose}>
             Cancel
           </Button>

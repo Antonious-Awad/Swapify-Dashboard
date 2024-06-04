@@ -1,12 +1,11 @@
+import { useNavigate } from 'react-router-dom'
+import { AxiosResponse } from 'axios'
+import { useMutation } from '@tanstack/react-query'
 import { Button, Flex, Form } from 'antd'
 import { Email } from '../../components/icons'
-import { Input } from '../../components/Input/'
-import { InputPassword } from '../../components/Input'
+import { InputPassword, Input } from '../../components/Input'
 import { LoginResponse, login, type LoginRequest } from '../../api/login'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
 import { useModal } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
 import { storeSessionsToken } from '../../utils/token'
 import { AppErrorResponse } from '../../common/types'
@@ -44,7 +43,7 @@ export const LoginForm = () => {
       <Flex vertical align="center" className="w-full">
         <Form form={form} onFinish={handleOnSubmit} className="w-[75%]">
           <Form.Item
-            name={'email'}
+            name="email"
             messageVariables={{ label: 'Email' }}
             rules={[{ required: true, type: 'email' }]}
           >
@@ -56,7 +55,7 @@ export const LoginForm = () => {
             />
           </Form.Item>
           <Form.Item
-            name={'password'}
+            name="password"
             messageVariables={{ label: 'Password' }}
             rules={[{ required: true }]}
           >

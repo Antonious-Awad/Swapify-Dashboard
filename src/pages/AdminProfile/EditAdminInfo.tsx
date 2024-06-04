@@ -1,7 +1,7 @@
 import { Button, Flex, Form, Space } from 'antd'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AdminInfoForm, EditAdminInfoProps } from './types'
 import { Input } from '../../components/Input'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateAdminInfo } from '../../api/admin'
 import { validateEnglishNumber } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
@@ -35,11 +35,11 @@ export const EditAdminInfo = ({ adminInfo, onClose }: EditAdminInfoProps) => {
   }
   return (
     <Form form={form} onFinish={handleSubmit} initialValues={formInitialValues}>
-      <Form.Item name={'username'} messageVariables={{ label: 'Name' }}>
+      <Form.Item name="username" messageVariables={{ label: 'Name' }}>
         <Input name="username" title="Name" />
       </Form.Item>
       <Form.Item
-        name={'email'}
+        name="email"
         messageVariables={{ label: 'Email' }}
         rules={[
           {
@@ -51,23 +51,20 @@ export const EditAdminInfo = ({ adminInfo, onClose }: EditAdminInfoProps) => {
         <Input name="email" title="Email" type="email" />
       </Form.Item>
       <Form.Item
-        name={'phone'}
+        name="phone"
         messageVariables={{ label: 'Contact Phone' }}
         rules={[validateEnglishNumber]}
       >
         <Input name="phone" title="Contact Phone" />
       </Form.Item>
-      <Form.Item name={'city'} messageVariables={{ label: 'City' }}>
+      <Form.Item name="city" messageVariables={{ label: 'City' }}>
         <Input name="city" title="City" />
       </Form.Item>
-      <Form.Item
-        name={'governorate'}
-        messageVariables={{ label: 'Governorate' }}
-      >
+      <Form.Item name="governorate" messageVariables={{ label: 'Governorate' }}>
         <Input name="governorate" title="Governorate" />
       </Form.Item>
       <Flex justify="end">
-        <Space size={'middle'}>
+        <Space size="middle">
           <Button type="default" onClick={onClose}>
             Cancel
           </Button>

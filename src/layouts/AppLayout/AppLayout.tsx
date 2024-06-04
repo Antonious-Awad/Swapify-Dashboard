@@ -1,10 +1,10 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { APP_PATHS } from '../../utils/paths'
 import { Button, Dropdown, Layout, MenuProps, Typography } from 'antd'
-import { Sidebar } from '../../components/Sidebar/Sidebar'
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { APP_PATHS } from '../../utils/paths'
 import { checkValidToken, removeSessionsToken } from '../../utils/token'
 import { capitalizeFirstLetter } from '../../utils/string'
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { Sidebar } from '../../components/Sidebar'
 
 export const AppLayout = () => {
   const { pathname } = useLocation()

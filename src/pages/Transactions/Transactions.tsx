@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios'
+import { Empty, Flex, Table } from 'antd'
 import { useState, useEffect } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {
@@ -5,8 +7,6 @@ import {
   getTransactionDetails,
 } from '../../api/transactions/requests'
 import { useModal } from '../../hooks'
-import { AxiosResponse } from 'axios'
-import { Empty, Flex, Table } from 'antd'
 import { AppErrorResponse, TableTransaction } from '../../common/types'
 import { transactionTableColumns } from './config'
 import {
@@ -78,7 +78,7 @@ export const Transactions = () => {
           'Fetching Transactions Failed'
       )
     }
-  }, [isFetchingAllTransactionError])
+  }, [activateModal, fetchTransactionsError, isFetchingAllTransactionError])
 
   const handleExpand = (expanded: boolean, record: TableTransaction) => {
     if (expanded) {

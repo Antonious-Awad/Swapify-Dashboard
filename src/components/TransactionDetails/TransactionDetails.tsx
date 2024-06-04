@@ -18,7 +18,7 @@ export const TransactionDetails = ({
           <Row>
             {itemKeys.map((key) => (
               <Col key={`offered-item-${key}`} span={8}>
-                <Space size={'middle'} direction="vertical">
+                <Space size="middle" direction="vertical">
                   <Typography.Text>{itemTitles[key]}</Typography.Text>
                   <Typography.Text>
                     {transactionDetails?.offered_item[key] || 'N/A'}
@@ -34,7 +34,7 @@ export const TransactionDetails = ({
           <Row>
             {itemKeys.map((key) => (
               <Col key={`requested-item-${key}`} span={8}>
-                <Space size={'middle'} direction="vertical">
+                <Space size="middle" direction="vertical">
                   <Typography.Text>{itemTitles[key]}</Typography.Text>
                   <Typography.Text>
                     {transactionDetails?.requested_item[key] || 'N/A'}

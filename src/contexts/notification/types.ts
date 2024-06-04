@@ -1,4 +1,3 @@
-import { NotificationArgsProps } from 'antd'
 import { ArgsProps, NotificationInstance } from 'antd/es/notification/interface'
 
 export type NotificationTypes = keyof NotificationInstance

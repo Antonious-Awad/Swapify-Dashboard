@@ -1,9 +1,10 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SwapifyLogo } from '../../components/icons'
 import { LoginForm } from './LoginForm'
 import { checkValidToken } from '../../utils/token'
 import { APP_PATHS } from '../../utils/paths'
-import { useEffect } from 'react'
+
 export const Login = () => {
   const navigate = useNavigate()
 

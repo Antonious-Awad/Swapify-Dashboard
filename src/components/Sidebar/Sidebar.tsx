@@ -1,7 +1,7 @@
-import { Button, Layout, Menu, MenuProps } from 'antd'
-import { Collapse, SwapifyLogo } from '../icons'
+import { Button, Layout, Menu } from 'antd'
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Collapse, SwapifyLogo } from '../icons'
 import { APP_PATHS } from '../../utils/paths'
 import { sidebarItems } from '../../utils/menuItems'
 import { CollapsedTRDLogo } from '../icons/CollapsedTRDLogo'
@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const navigate = useNavigate()
 
   return (
-    <Sider collapsible trigger={null} width={'18%'} collapsed={collapse}>
+    <Sider collapsible trigger={null} width="18%" collapsed={collapse}>
       <div
         className={`flex justify-between px-5 py-6 ${collapse ? 'flex-col items-center' : ''}`}
       >

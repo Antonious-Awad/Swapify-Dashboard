@@ -1,12 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useModal } from '../../hooks'
-import {
-  GetAdminInfoRes,
-  getAdminInfo,
-  updateAdminPhoto,
-} from '../../api/admin'
 import { AxiosResponse } from 'axios'
-import { AppErrorResponse, DefaultApiResponse } from '../../common/types'
 import {
   Avatar,
   Button,
@@ -26,6 +19,13 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
+import { AppErrorResponse, DefaultApiResponse } from '../../common/types'
+import {
+  GetAdminInfoRes,
+  getAdminInfo,
+  updateAdminPhoto,
+} from '../../api/admin'
+import { useModal } from '../../hooks'
 import { EditAdminInfo } from './EditAdminInfo'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { uploadAdminPhotoHandler } from './config'
@@ -193,7 +193,7 @@ export const AdminProfile = () => {
       </div>
       <FloatButton
         icon={<EditOutlined />}
-        tooltip={'Edit Admin Info'}
+        tooltip="Edit Admin Info"
         onClick={() => setIsEditInfo(true)}
       />
       <Modal

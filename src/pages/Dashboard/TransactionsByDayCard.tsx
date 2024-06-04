@@ -1,6 +1,3 @@
-import type { GetTransactionsByDayRes } from '../../api/statistics'
-import { Card, Col, Flex, Row, Space, Typography } from 'antd'
-import type { BaseStatisticsCardProps } from './types'
 import {
   Legend,
   Line,
@@ -9,6 +6,9 @@ import {
   Tooltip,
   XAxis,
 } from 'recharts'
+import { Card, Col, Flex, Row, Space, Typography } from 'antd'
+import type { GetTransactionsByDayRes } from '../../api/statistics'
+import type { BaseStatisticsCardProps } from './types'
 import { colors } from '../../styles/colors'
 
 export const TransactionsByDayCard = ({
@@ -25,7 +25,7 @@ export const TransactionsByDayCard = ({
       <Row>
         <Col span={12}>
           <Flex align="center" className="h-full">
-            <Space size={'large'} direction="vertical">
+            <Space size="large" direction="vertical">
               <Typography.Text className="font-semibold text-[18px]">
                 Total Transactions
               </Typography.Text>
@@ -40,13 +40,13 @@ export const TransactionsByDayCard = ({
             <LineChart data={query.data?.data.dailyTotals}>
               <Line
                 type="monotone"
-                dataKey={'total'}
+                dataKey="total"
                 name="Transactions"
                 stroke={colors.brand[200]}
-                strokeWidth={'3px'}
+                strokeWidth="3px"
                 dot={false}
               />
-              <XAxis dataKey={'day'} />
+              <XAxis dataKey="day" />
               <Legend verticalAlign="top" align="left" />
               <Tooltip />
             </LineChart>

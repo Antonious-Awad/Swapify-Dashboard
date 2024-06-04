@@ -1,7 +1,7 @@
+import { DeleteOutlined } from '@ant-design/icons'
 import { Button, Popconfirm, TableProps, Typography } from 'antd'
 import { Category, Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
-import { DeleteOutlined } from '@ant-design/icons'
 
 export const categoriesListColumns = (
   onDelete: (id: Category['id']) => void,

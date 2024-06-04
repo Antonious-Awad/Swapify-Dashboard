@@ -22,7 +22,7 @@ export const calculateTimeFromToday = (date: string | number) => {
   const diffDays = Math.floor(diffInMillis / oneDay)
   differenceInterval = `${diffDays} days`
 
-  return differenceInterval + ' ago'
+  return `${differenceInterval} ago`
 }
 
 export const formatToDDMMMYYYY = (date: string | number) => {

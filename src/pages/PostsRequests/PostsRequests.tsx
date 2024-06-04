@@ -1,4 +1,7 @@
+import { Flex, Table } from 'antd'
+import { AxiosResponse } from 'axios'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useRef, useState } from 'react'
 import { useModal } from '../../hooks'
 import {
   GetRequestsReq,
@@ -7,15 +10,12 @@ import {
   getPostsRequests,
   updateItemStatus,
 } from '../../api/postsRequests'
-import { AxiosResponse } from 'axios'
 import {
   AppErrorResponse,
   DefaultApiResponse,
   PostRequestItem,
 } from '../../common/types'
-import { Flex, Table } from 'antd'
 import { itemsListColumns } from './config'
-import { useEffect, useRef, useState } from 'react'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { InputSearch } from '../../components/Input/InputSearch'
 import { SelectDropdown } from '../../components/SelectDropdown'
@@ -83,7 +83,7 @@ export const PostsRequests = () => {
         'danger',
         error.response?.data.message || 'Error fetching items'
       )
-  }, [isError, error])
+  }, [isError, error, activateModal])
 
   const handleUpdate = (id: string, status: PostRequestItem['status']) => {
     updateStatus({ itemId: id, status })

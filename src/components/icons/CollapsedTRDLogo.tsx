@@ -9,7 +9,7 @@ export const CollapsedTRDLogo = ({ width, height }: BaseSVG) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_525_3)">
+      <g clipPath="url(#clip0_525_3)">
         <path
           d="M8.32811 258.011H247.161L220.047 230.897H34.3773V34.3698L220.417 34.7285L247.086 8.32811H8.32811V258.011ZM267.266 266.339H0V0H267.34L223.835 43.0641L42.7054 42.7129V222.569H223.495L267.266 266.339Z"
           fill="#0E7490"

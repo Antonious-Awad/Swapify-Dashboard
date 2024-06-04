@@ -1,18 +1,18 @@
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { AxiosResponse } from 'axios'
+import { Table } from 'antd'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { deleteCustomer, getCustomers } from '../../api/customer/requests'
 import { useModal } from '../../hooks'
-import { useEffect, useRef, useState } from 'react'
 import {
   GetCustomerReq,
   GetCustomersRes,
   DeleteCustomerRes,
 } from '../../api/customer'
 import { AppErrorResponse, Customer } from '../../common/types'
-import { AxiosResponse } from 'axios'
-import { Table } from 'antd'
 import { customerListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
-import { useNavigate } from 'react-router-dom'
 import { APP_PATHS } from '../../utils/paths'
 import { InputSearch } from '../../components/Input'
 

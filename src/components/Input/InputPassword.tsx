@@ -8,7 +8,7 @@ export const InputPassword = ({
   ...rest
 }: PasswordProps) => {
   return (
-    <Flex align="start" vertical gap={'0.5rem'}>
+    <Flex align="start" vertical gap="0.5rem">
       <Typography.Text className="font-semibold">{placeholder}</Typography.Text>
       <AntdInput.Password
         placeholder={placeholder}

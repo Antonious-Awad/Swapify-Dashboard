@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const Collapse = () => {
   return (
     <svg
@@ -12,7 +10,7 @@ export const Collapse = () => {
       <path
         d="M20 6H13"
         stroke="#888888"
-        strokeWidth={'1.75'}
+        strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

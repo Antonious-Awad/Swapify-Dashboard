@@ -10,7 +10,8 @@ export const CircleGraph = ({ data }: CircleGraphProps) => {
   const perDayStyle =
     'text-white relative tracking-[-0.02em] leading-5 font-medium opacity-[0.5]'
 
-  if (data.length === 0) return <Empty description={'No Categories to show'} />
+  if (data.length === 0)
+    return <Empty description="No Categories to show" className="mt-10" />
   return (
     <div className="mx-1">
       <Flex align="center" justify="center">

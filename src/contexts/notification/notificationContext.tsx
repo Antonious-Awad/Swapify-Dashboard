@@ -1,10 +1,16 @@
-import { ReactNode, createContext, useCallback, useContext } from 'react'
+import { notification } from 'antd'
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+} from 'react'
 import {
   NotificationConfig,
   NotificationContext,
   NotificationTypes,
 } from './types'
-import { notification } from 'antd'
 
 const notificationContext = createContext<NotificationContext | undefined>(
   undefined
@@ -25,8 +31,14 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
     [api]
   )
 
+  const contextVal = useMemo(
+    () => ({
+      notification: openNotification,
+    }),
+    [openNotification]
+  )
   return (
-    <notificationContext.Provider value={{ notification: openNotification }}>
+    <notificationContext.Provider value={contextVal}>
       {contextHolder}
       {children}
     </notificationContext.Provider>

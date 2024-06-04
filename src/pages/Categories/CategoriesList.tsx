@@ -1,3 +1,6 @@
+import { Button, Flex, Modal, Table } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   DeleteCategoryRes,
@@ -7,12 +10,9 @@ import {
   getCategories,
 } from '../../api/categories'
 import { AppErrorResponse, Category } from '../../common/types'
-import { useEffect, useRef, useState } from 'react'
 import { useModal } from '../../hooks'
-import { Button, Flex, Modal, Space, Table } from 'antd'
 import { categoriesListColumns } from './config'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
-import { PlusCircleOutlined } from '@ant-design/icons'
 import { CreateCategory } from './CreateCategory'
 import { InputSearch } from '../../components/Input'
 
@@ -72,7 +72,7 @@ export const CategoriesList = () => {
           categoriesError.response?.data.message ||
           'Fetching categories failed'
       )
-  }, [isCategoriesError])
+  }, [isCategoriesError, categoriesError])
 
   return (
     <>
@@ -97,7 +97,7 @@ export const CategoriesList = () => {
       </Flex>
       <Table<Category>
         dataSource={categories?.data.data}
-        rowKey={'id'}
+        rowKey="id"
         columns={categoriesListColumns(
           deletCategoryMutate,
           isDeleting,

@@ -8,20 +8,18 @@ import type { AcceptedItem } from '../../common/types'
 
 export const AcceptedItemsCard = ({
   query,
-}: BaseStatisticsCardProps<GetAcceptedItemsRes>) => {
-  return (
-    <Card bordered={false} className="w-full" loading={query.isLoading}>
-      <TitleWithMoreDetails
-        title="Recent Posts"
-        moreDetailsPath={APP_PATHS.postsRequest}
-      />
-      <Table<AcceptedItem>
-        loading={query.isLoading}
-        dataSource={query.data?.data.data}
-        columns={acceptedItemsColumns}
-        rowKey={({ _id }) => _id}
-        pagination={false}
-      />
-    </Card>
-  )
-}
+}: BaseStatisticsCardProps<GetAcceptedItemsRes>) => (
+  <Card bordered={false} className="w-full" loading={query.isLoading}>
+    <TitleWithMoreDetails
+      title="Recent Posts"
+      moreDetailsPath={APP_PATHS.postsRequest}
+    />
+    <Table<AcceptedItem>
+      loading={query.isLoading}
+      dataSource={query.data?.data.data}
+      columns={acceptedItemsColumns}
+      rowKey={({ _id }) => _id}
+      pagination={false}
+    />
+  </Card>
+)

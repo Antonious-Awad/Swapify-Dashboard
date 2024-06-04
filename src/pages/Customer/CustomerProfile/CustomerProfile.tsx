@@ -1,3 +1,6 @@
+import { Divider, Empty, Table } from 'antd'
+import { AxiosError, AxiosResponse } from 'axios'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 import {
@@ -6,12 +9,9 @@ import {
   getCustomerInfo,
   getCustomerRequests,
 } from '../../../api/customer'
-import { AxiosError, AxiosResponse } from 'axios'
 import { useModal } from '../../../hooks'
-import { useEffect, useState } from 'react'
 import { AppErrorResponse, CustomerRequest } from '../../../common/types'
 import { CustomerCard } from '../../../components/CustomerCard/CustomerCard'
-import { Divider, Empty, Table } from 'antd'
 import { useNotificationContext } from '../../../contexts/notification/notificationContext'
 import { customerRequestsColumns } from './config'
 import {

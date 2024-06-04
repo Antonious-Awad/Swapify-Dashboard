@@ -1,9 +1,8 @@
-import { Button, Popconfirm, Space, TableProps, Typography } from 'antd'
-import { PostRequestItem, RangeOptions } from '../../common/types'
-import { formatToDDMMMYYYY } from '../../utils/date'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { Button, Popconfirm, Space, TableProps, Typography } from 'antd'
+import { PostRequestItem } from '../../common/types'
+import { formatToDDMMMYYYY } from '../../utils/date'
 import { statusColor } from '../../common/utils'
-import { DefaultOptionType } from 'antd/es/select'
 
 export const itemsListColumns = (
   handleStatus: (id: string, status: PostRequestItem['status']) => void,
@@ -49,35 +48,33 @@ export const itemsListColumns = (
   {
     key: 'action',
     title: 'Actions',
-    render: (_, { _id }) => {
-      return (
-        <Space>
-          <Popconfirm
-            title="Are You Sure?"
-            onConfirm={() => handleStatus(_id, 'accepted')}
+    render: (_, { _id }) => (
+      <Space>
+        <Popconfirm
+          title="Are You Sure?"
+          onConfirm={() => handleStatus(_id, 'accepted')}
+        >
+          <Button
+            icon={<CheckCircleOutlined />}
+            className="text-success-400 border-success-400"
+            loading={isUpdatingStatus && currId === _id}
           >
-            <Button
-              icon={<CheckCircleOutlined />}
-              className="text-success-400 border-success-400"
-              loading={isUpdatingStatus && currId === _id}
-            >
-              Approve
-            </Button>
-          </Popconfirm>
-          <Popconfirm
-            title="Are You Sure?"
-            onConfirm={() => handleStatus(_id, 'rejected')}
+            Approve
+          </Button>
+        </Popconfirm>
+        <Popconfirm
+          title="Are You Sure?"
+          onConfirm={() => handleStatus(_id, 'rejected')}
+        >
+          <Button
+            icon={<CloseCircleOutlined />}
+            className="text-danger-400 border-danger-400"
+            loading={isUpdatingStatus && currId === _id}
           >
-            <Button
-              icon={<CloseCircleOutlined />}
-              className="text-danger-400 border-danger-400"
-              loading={isUpdatingStatus && currId === _id}
-            >
-              Reject
-            </Button>
-          </Popconfirm>
-        </Space>
-      )
-    },
+            Reject
+          </Button>
+        </Popconfirm>
+      </Space>
+    ),
   },
 ]

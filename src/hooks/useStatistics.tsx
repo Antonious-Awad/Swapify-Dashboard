@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
+import { useEffect } from 'react'
 import { AppErrorResponse } from '../common/types'
 import {
   type GetTransactionsByDayRes,
@@ -18,7 +19,6 @@ import {
   type GetAcceptedItemsRes,
 } from '../api/statistics'
 import { useNotificationContext } from '../contexts/notification/notificationContext'
-import { useEffect } from 'react'
 
 export const useStatistics = () => {
   const { notification } = useNotificationContext()

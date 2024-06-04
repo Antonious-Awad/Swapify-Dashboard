@@ -1,12 +1,4 @@
 import { Col, Row, Space, TableProps, TabsProps, Typography } from 'antd'
-import type { GetReportsCountsRes } from '../../api/statistics'
-import {
-  type AcceptedItem,
-  Customer,
-  PostRequestItem,
-  TableTransaction,
-  reportRecord,
-} from '../../common/types'
 import {
   Line,
   LineChart,
@@ -15,6 +7,14 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import type { GetReportsCountsRes } from '../../api/statistics'
+import {
+  type AcceptedItem,
+  Customer,
+  PostRequestItem,
+  TableTransaction,
+  reportRecord,
+} from '../../common/types'
 import { colors } from '../../styles/colors'
 import { formatToDDMMMYYYY } from '../../utils/date'
 import { statusColor } from '../../common/utils'
@@ -35,13 +35,13 @@ const reportTabRender = (records: reportRecord[]) => (
     <LineChart data={records}>
       <Line
         type="monotone"
-        dataKey={'count'}
+        dataKey="count"
         stroke={colors.brand[200]}
-        strokeWidth={'3px'}
+        strokeWidth="3px"
         dot={false}
       />
-      <XAxis dataKey={'day'} />
-      <YAxis dataKey={'count'} axisLine={false} />
+      <XAxis dataKey="day" />
+      <YAxis dataKey="count" axisLine={false} />
       <Tooltip />
     </LineChart>
   </ResponsiveContainer>
@@ -122,16 +122,14 @@ export const recentUsersColumns: TableProps<Customer>['columns'] = [
   {
     dataIndex: 'username',
     render: (username: Customer['username'], { location }) => (
-      <>
-        <Col>
-          <Row className="font-semibold text-brand-400 text-[15px]">
-            {username}
-          </Row>
-          <Row className="text-neutral-300 text-[12px] font-medium">
-            {location.city} , {location.governorate}
-          </Row>
-        </Col>
-      </>
+      <Col>
+        <Row className="font-semibold text-brand-400 text-[15px]">
+          {username}
+        </Row>
+        <Row className="text-neutral-300 text-[12px] font-medium">
+          {location.city} , {location.governorate}
+        </Row>
+      </Col>
     ),
   },
   {

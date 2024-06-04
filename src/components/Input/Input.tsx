@@ -2,7 +2,7 @@ import { InputProps, Input as AntdInput, Typography, Flex } from 'antd'
 
 export const Input = ({ variant, placeholder, ...rest }: InputProps) => {
   return (
-    <Flex align="start" vertical gap={'0.5rem'}>
+    <Flex align="start" vertical gap="0.5rem">
       <Typography.Text className="font-semibold">
         {placeholder || rest.title}
       </Typography.Text>

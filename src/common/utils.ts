@@ -1,6 +1,6 @@
-import { PostRequestItem, RangeOptions } from './types'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { PostRequestItem, RangeOptions } from './types'
 
 export const statusColor: Record<PostRequestItem['status'], string> = {
   pending: 'text-warning-300',
