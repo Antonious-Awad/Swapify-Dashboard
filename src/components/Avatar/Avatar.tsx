@@ -8,5 +8,8 @@ export const Avatar = ({ src, size, className }: AvatarProps) => (
     width={size}
     height={size}
     className={cn('rounded-full object-cover', className)}
+    preview={{
+      maskClassName: 'rounded-full',
+    }}
   />
 )
