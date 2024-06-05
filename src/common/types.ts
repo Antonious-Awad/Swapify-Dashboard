@@ -86,7 +86,11 @@ export type PostRequestItem = {
   Description: string
   price: number
   category: string
-  user: string
+  user: {
+    _id: string
+    username: string
+    email: string
+  }
   condition: boolean
   slug: string
   image: ImageObject

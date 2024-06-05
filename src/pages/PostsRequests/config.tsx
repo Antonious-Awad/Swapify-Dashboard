@@ -18,6 +18,7 @@ export const itemsListColumns = (
     dataIndex: 'user',
     key: 'user',
     title: 'USER',
+    render: (user: PostRequestItem['user']) => user.username,
   },
   {
     dataIndex: 'created_at',
