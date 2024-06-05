@@ -1,8 +1,9 @@
-import { DeleteOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar, Button, Col, Popconfirm, Row, Space, TableProps } from 'antd'
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { Button, Col, Popconfirm, Row, Space, TableProps } from 'antd'
 import { Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
 import { CustomerListColumns } from './types'
+import { Avatar } from '../../components/Avatar'
 
 export const customerListColumns = ({
   currentId,
@@ -22,7 +23,7 @@ export const customerListColumns = ({
     render: (username: Customer['username'], { email, image }) => (
       <Row align="middle">
         <Col span={4}>
-          <Avatar src={image?.url} icon={<UserOutlined />} size={32} />
+          <Avatar src={image?.url} size={50} />
         </Col>
         <Col>
           <Row className="font-semibold text-brand-400">{username}</Row>

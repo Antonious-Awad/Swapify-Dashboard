@@ -1,6 +1,6 @@
-import { Avatar, Card, Col, Divider, Row, Space, Typography } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
+import { Card, Col, Divider, Row, Space, Typography } from 'antd'
 import { CustomerCardProps } from './types'
+import { Avatar } from '../Avatar'
 
 export const CustomerCard = ({
   isLoading,
@@ -11,11 +11,7 @@ export const CustomerCard = ({
     <Card bordered={false} className="m-auto mt-[3rem]" loading={isLoading}>
       <Row gutter={24} align="middle">
         <Col span={3}>
-          <Avatar
-            size={100}
-            icon={<UserOutlined />}
-            src={customerDetails?.image?.url}
-          />
+          <Avatar size={100} src={customerDetails?.image?.url} />
         </Col>
         <Col span={5} className="mb-[1rem]">
           <Title level={3}>{customerDetails?.username}</Title>

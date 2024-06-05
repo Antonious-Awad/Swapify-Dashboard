@@ -1,15 +1,8 @@
-import { DeleteOutlined, ProductOutlined } from '@ant-design/icons'
-import {
-  Avatar,
-  Button,
-  Col,
-  Popconfirm,
-  Row,
-  type TableProps,
-  Typography,
-} from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import { Button, Col, Popconfirm, Row, type TableProps, Typography } from 'antd'
 import { Category, Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
+import { Avatar } from '../../components/Avatar'
 
 export const categoriesListColumns = (
   onDelete: (id: Category['id']) => void,
@@ -28,7 +21,7 @@ export const categoriesListColumns = (
     render: (name: Category['name'], { image }) => (
       <Row align="middle">
         <Col span={4}>
-          <Avatar src={image?.url} icon={<ProductOutlined />} size={50} />
+          <Avatar src={image?.url} size={50} />
         </Col>
         <Col>
           <Typography.Text className="font-semibold text-brand-300">

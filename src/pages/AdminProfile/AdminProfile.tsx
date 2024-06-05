@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import {
-  Avatar,
   Button,
   Card,
   Col,
@@ -16,7 +15,6 @@ import {
   EditOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
-  UserOutlined,
 } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
 import { AppErrorResponse, DefaultApiResponse } from '../../common/types'
@@ -29,6 +27,7 @@ import { useModal } from '../../hooks'
 import { EditAdminInfo } from './EditAdminInfo'
 import { useNotificationContext } from '../../contexts/notification/notificationContext'
 import { uploadAdminPhotoHandler } from './config'
+import { Avatar } from '../../components/Avatar'
 
 export const AdminProfile = () => {
   const { activateModal } = useModal()
@@ -99,12 +98,7 @@ export const AdminProfile = () => {
     <>
       <div className="p-4">
         <div className="relative w-min">
-          <Avatar
-            size={120}
-            icon={<UserOutlined />}
-            src={adminInfo?.image?.url}
-            className="relative"
-          />
+          <Avatar size={120} src={adminInfo?.image?.url} className="relative" />
           <div className="absolute bottom-0 right-0">
             <Button
               type="primary"
