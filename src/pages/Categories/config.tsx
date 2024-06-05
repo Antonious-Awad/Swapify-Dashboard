@@ -28,7 +28,7 @@ export const categoriesListColumns = (
     render: (name: Category['name'], { image }) => (
       <Row align="middle">
         <Col span={4}>
-          <Avatar src={image?.url} icon={<ProductOutlined />} size={40} />
+          <Avatar src={image?.url} icon={<ProductOutlined />} size={50} />
         </Col>
         <Col>
           <Typography.Text className="font-semibold text-brand-300">
