@@ -1,5 +1,13 @@
-import { DeleteOutlined } from '@ant-design/icons'
-import { Button, Popconfirm, TableProps, Typography } from 'antd'
+import { DeleteOutlined, ProductOutlined } from '@ant-design/icons'
+import {
+  Avatar,
+  Button,
+  Col,
+  Popconfirm,
+  Row,
+  type TableProps,
+  Typography,
+} from 'antd'
 import { Category, Customer } from '../../common/types'
 import { formatToDDMMMYYYY } from '../../utils/date'
 
@@ -17,10 +25,17 @@ export const categoriesListColumns = (
     dataIndex: 'name',
     key: 'name',
     title: 'Category Name',
-    render: (name: Category['name']) => (
-      <Typography.Text className="font-semibold text-brand-300">
-        {name}
-      </Typography.Text>
+    render: (name: Category['name'], { image }) => (
+      <Row align="middle">
+        <Col span={4}>
+          <Avatar src={image?.url} icon={<ProductOutlined />} size={40} />
+        </Col>
+        <Col>
+          <Typography.Text className="font-semibold text-brand-300">
+            {name}
+          </Typography.Text>
+        </Col>
+      </Row>
     ),
   },
   {

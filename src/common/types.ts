@@ -51,6 +51,7 @@ export type Category = {
   createdAt: string
   itemCount: number
   name: string
+  image: ImageObject
 }
 
 export type CustomerRequest = {
