@@ -46,7 +46,7 @@ export const TransactionsByDayCard = ({
                 strokeWidth="3px"
                 dot={false}
               />
-              <XAxis dataKey="day" />
+              <XAxis dataKey="day" interval="preserveStartEnd" />
               <Legend verticalAlign="top" align="left" />
               <Tooltip />
             </LineChart>
