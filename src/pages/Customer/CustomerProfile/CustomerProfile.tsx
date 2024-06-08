@@ -11,7 +11,7 @@ import {
 } from '../../../api/customer'
 import { useModal } from '../../../hooks'
 import { AppErrorResponse, CustomerRequest } from '../../../common/types'
-import { CustomerCard } from '../../../components/CustomerCard/CustomerCard'
+import { CustomerCard } from '../../../components/CustomerCard'
 import { useNotificationContext } from '../../../contexts/notification/notificationContext'
 import { customerRequestsColumns } from './config'
 import {
